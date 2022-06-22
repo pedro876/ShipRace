@@ -1,0 +1,34 @@
+{
+    "name": "GameControls",
+    "maps": [
+        {
+            "name": "ShipControls",
+            "id": "fb8b9f1e-474c-488f-8d06-02e1960b9cb4",
+            "actions": [
+                {
+                    "name": "AimDir",
+                    "type": "PassThrough",
+                    "id": "24726482-28b1-4be3-96cc-c47c1021d833",
+                    "expectedControlType": "Quaternion",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "11416f6a-2cae-4705-8085-3572ee4b5e6a",
+                    "path": "<AttitudeSensor>/attitude",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AimDir",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
