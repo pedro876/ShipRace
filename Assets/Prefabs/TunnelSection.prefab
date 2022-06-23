@@ -1,5 +1,123 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &127439466
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 127439467}
+  m_Layer: 0
+  m_Name: ObstaclePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &127439467
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127439466}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7722270901042755177}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2101063746
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2101063747}
+  - component: {fileID: 2101063751}
+  - component: {fileID: 2101063750}
+  - component: {fileID: 2101063749}
+  - component: {fileID: 2101063748}
+  m_Layer: 0
+  m_Name: Colliders
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2101063747
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2101063746}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7722270901042755177}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2101063751
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2101063746}
+  m_Material: {fileID: 13400000, guid: 71d6c7d77fbd9a540b00e48c175e3c35, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 15.714015, y: 2.4125519, z: 21.590012}
+  m_Center: {x: -0.17656708, y: 7.64, z: -0.083693825}
+--- !u!65 &2101063750
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2101063746}
+  m_Material: {fileID: 13400000, guid: 71d6c7d77fbd9a540b00e48c175e3c35, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 15.714015, y: 2.4125519, z: 21.590012}
+  m_Center: {x: -0.17656708, y: -7.64, z: -0.083693825}
+--- !u!65 &2101063749
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2101063746}
+  m_Material: {fileID: 13400000, guid: 71d6c7d77fbd9a540b00e48c175e3c35, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.6592388, y: 16.606495, z: 21.590012}
+  m_Center: {x: -7.18, y: -0.543033, z: -0.08369446}
+--- !u!65 &2101063748
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2101063746}
+  m_Material: {fileID: 13400000, guid: 71d6c7d77fbd9a540b00e48c175e3c35, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.6592388, y: 16.606495, z: 21.590012}
+  m_Center: {x: 7.18, y: -0.543033, z: -0.08369446}
 --- !u!1 &3559559020322587569
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +129,6 @@ GameObject:
   - component: {fileID: 852972338644189256}
   - component: {fileID: 109769702332867712}
   - component: {fileID: 8843374755715725685}
-  - component: {fileID: 8480732161984204552}
   m_Layer: 0
   m_Name: TunnelSection
   m_TagString: Untagged
@@ -84,20 +201,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8480732161984204552
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3559559020322587569}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5853143806599193571, guid: 66cfdb7fe550c2c48a941aaa004f78ca, type: 3}
 --- !u!1 &6318931882949445927
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +212,6 @@ GameObject:
   - component: {fileID: 7609551456958682832}
   - component: {fileID: 1654941571074072894}
   - component: {fileID: 7088267754869771003}
-  - component: {fileID: 8930731079535872057}
   m_Layer: 0
   m_Name: TunnelGlassSection
   m_TagString: Untagged
@@ -182,20 +284,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8930731079535872057
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6318931882949445927}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 1570080789604970267, guid: 66cfdb7fe550c2c48a941aaa004f78ca, type: 3}
 --- !u!1 &6944784635646536915
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,6 +293,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7722270901042755177}
+  - component: {fileID: 543450652798965627}
   m_Layer: 0
   m_Name: TunnelSection
   m_TagString: Untagged
@@ -221,11 +310,32 @@ Transform:
   m_GameObject: {fileID: 6944784635646536915}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7609551456958682832}
   - {fileID: 852972338644189256}
+  - {fileID: 2101063747}
+  - {fileID: 127439467}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &543450652798965627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6944784635646536915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e16be91761bfce24b8f1aaf160a70298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  length: 60
+  obstaclePrefabs:
+  - {fileID: 1675527828247754714, guid: 18b0d057d6e3b8346b8636602707be23, type: 3}
+  - {fileID: 8487336952192268484, guid: 2ed40a98534ab5542bf1ba4c1df68ffd, type: 3}
+  - {fileID: 2114844082580170956, guid: f83e52701b13d0349aa6a7afd7505845, type: 3}
+  obstaclePoints:
+  - {fileID: 127439467}

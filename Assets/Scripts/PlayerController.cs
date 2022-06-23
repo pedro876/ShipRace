@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float zSpeed = 10f;
-    [SerializeField] float xySpeed = 3f;
+    [SerializeField] float xSpeed = 30f;
+    [SerializeField] float ySpeed = 20f;
     [SerializeField] float maxHorizontalAngle = 45f;
     [SerializeField] float maxVerticalAngle = 45f;
     Rigidbody rb;
@@ -27,15 +28,19 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //transform.rotation = gyro.Attitude;
-        //rb.velocity = transform.forward * speed;
+        
+    }
 
+    private void FixedUpdate()
+    {
         Quaternion horizontalRot = Quaternion.AngleAxis(input.leftAxis.x * maxHorizontalAngle, -Vector3.forward);
         Quaternion verticalRot = Quaternion.AngleAxis(input.leftAxis.y * maxVerticalAngle, -Vector3.right);
 
-        transform.rotation = horizontalRot * verticalRot;
+        rb.MoveRotation(horizontalRot * verticalRot);
+        //transform.rotation = horizontalRot * verticalRot;
 
-        Vector3 speed = transform.forward * zSpeed + Vector3.right * input.leftAxis.x * xySpeed;
+        Vector3 speed = new Vector3(input.leftAxis.x * xSpeed, input.leftAxis.y * ySpeed, zSpeed);
+        //rb.MovePosition(transform.position + speed * Time.fixedDeltaTime);
         rb.velocity = speed;
     }
 }

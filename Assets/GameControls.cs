@@ -28,10 +28,19 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
             ""id"": ""fb8b9f1e-474c-488f-8d06-02e1960b9cb4"",
             ""actions"": [
                 {
-                    ""name"": ""AimDir"",
+                    ""name"": ""LeftHorizontalAxis"",
                     ""type"": ""PassThrough"",
                     ""id"": ""24726482-28b1-4be3-96cc-c47c1021d833"",
-                    ""expectedControlType"": ""Quaternion"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftVerticalAxis"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""522dafdc-f5e9-42ca-95d0-678a6539b10a"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -41,13 +50,156 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""11416f6a-2cae-4705-8085-3572ee4b5e6a"",
-                    ""path"": ""<AttitudeSensor>/attitude"",
+                    ""path"": ""<Gamepad>/leftStick/x"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""AimDir"",
+                    ""action"": ""LeftHorizontalAxis"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""d16f7f1c-f8f7-44a6-916c-e464d3bda282"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftHorizontalAxis"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""530800f0-6d09-48e8-a26c-bda23a48f9e2"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftHorizontalAxis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""fa366006-3b93-4770-9d86-6202ebb9f5d1"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftHorizontalAxis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis Dpad"",
+                    ""id"": ""3696dd21-915f-4242-8e69-cb22561cf8ca"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftHorizontalAxis"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""d079f684-dc12-44db-8edb-8a7874bd4459"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftHorizontalAxis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""f7b89bbb-65a8-449e-ba63-9760ca9531b7"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftHorizontalAxis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""377cac76-54d9-4d4a-a010-aa0be7b6d0ab"",
+                    ""path"": ""<Gamepad>/leftStick/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftVerticalAxis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""7af6dc3a-12eb-4596-b671-638cde61f7d8"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftVerticalAxis"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""14207151-b887-4f9a-9412-d0fee834d436"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftVerticalAxis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""5fad972d-b110-4be5-87bc-8cd84cf52ee7"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftVerticalAxis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis Dpad"",
+                    ""id"": ""0e9e1107-5e75-439d-a91b-aaaf2f6c1232"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftVerticalAxis"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""d0cb1655-b6f7-4905-9536-e99557eee6f1"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftVerticalAxis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""81a874dd-b4d7-492c-ad11-306686ad68e8"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftVerticalAxis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -56,7 +208,8 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
 }");
         // ShipControls
         m_ShipControls = asset.FindActionMap("ShipControls", throwIfNotFound: true);
-        m_ShipControls_AimDir = m_ShipControls.FindAction("AimDir", throwIfNotFound: true);
+        m_ShipControls_LeftHorizontalAxis = m_ShipControls.FindAction("LeftHorizontalAxis", throwIfNotFound: true);
+        m_ShipControls_LeftVerticalAxis = m_ShipControls.FindAction("LeftVerticalAxis", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -116,12 +269,14 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
     // ShipControls
     private readonly InputActionMap m_ShipControls;
     private IShipControlsActions m_ShipControlsActionsCallbackInterface;
-    private readonly InputAction m_ShipControls_AimDir;
+    private readonly InputAction m_ShipControls_LeftHorizontalAxis;
+    private readonly InputAction m_ShipControls_LeftVerticalAxis;
     public struct ShipControlsActions
     {
         private @GameControls m_Wrapper;
         public ShipControlsActions(@GameControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @AimDir => m_Wrapper.m_ShipControls_AimDir;
+        public InputAction @LeftHorizontalAxis => m_Wrapper.m_ShipControls_LeftHorizontalAxis;
+        public InputAction @LeftVerticalAxis => m_Wrapper.m_ShipControls_LeftVerticalAxis;
         public InputActionMap Get() { return m_Wrapper.m_ShipControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -131,22 +286,29 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_ShipControlsActionsCallbackInterface != null)
             {
-                @AimDir.started -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnAimDir;
-                @AimDir.performed -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnAimDir;
-                @AimDir.canceled -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnAimDir;
+                @LeftHorizontalAxis.started -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnLeftHorizontalAxis;
+                @LeftHorizontalAxis.performed -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnLeftHorizontalAxis;
+                @LeftHorizontalAxis.canceled -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnLeftHorizontalAxis;
+                @LeftVerticalAxis.started -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnLeftVerticalAxis;
+                @LeftVerticalAxis.performed -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnLeftVerticalAxis;
+                @LeftVerticalAxis.canceled -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnLeftVerticalAxis;
             }
             m_Wrapper.m_ShipControlsActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @AimDir.started += instance.OnAimDir;
-                @AimDir.performed += instance.OnAimDir;
-                @AimDir.canceled += instance.OnAimDir;
+                @LeftHorizontalAxis.started += instance.OnLeftHorizontalAxis;
+                @LeftHorizontalAxis.performed += instance.OnLeftHorizontalAxis;
+                @LeftHorizontalAxis.canceled += instance.OnLeftHorizontalAxis;
+                @LeftVerticalAxis.started += instance.OnLeftVerticalAxis;
+                @LeftVerticalAxis.performed += instance.OnLeftVerticalAxis;
+                @LeftVerticalAxis.canceled += instance.OnLeftVerticalAxis;
             }
         }
     }
     public ShipControlsActions @ShipControls => new ShipControlsActions(this);
     public interface IShipControlsActions
     {
-        void OnAimDir(InputAction.CallbackContext context);
+        void OnLeftHorizontalAxis(InputAction.CallbackContext context);
+        void OnLeftVerticalAxis(InputAction.CallbackContext context);
     }
 }
