@@ -40,7 +40,12 @@ public class PlayerController : MonoBehaviour
         //transform.rotation = horizontalRot * verticalRot;
 
         Vector3 speed = new Vector3(input.leftAxis.x * xSpeed, input.leftAxis.y * ySpeed, zSpeed);
-        //rb.MovePosition(transform.position + speed * Time.fixedDeltaTime);
+        //rb.AddForce(speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+        //Debug.Log(rb.velocity.magnitude);
         rb.velocity = speed;
+
+        /*rb.MovePosition(new Vector3(input.leftAxis.x * xSpeed, input.leftAxis.y * ySpeed, 0f) * Time.fixedDeltaTime);
+        rb.MovePosition(Vector3.forward * zSpeed * Time.fixedDeltaTime);
+        rb.velocity = Vector3.zero;*/
     }
 }

@@ -6,7 +6,7 @@ public class LevelManager : MonoBehaviour
 {
     Transform player;
 
-    [SerializeField] GameObject sectionPrefab;
+    [SerializeField] GameObject[] sectionPrefabs;
     [SerializeField] int numOfSections = 3;
     [SerializeField] int initialSectionWithoutObstacles = 3;
     [SerializeField] float distanceToReplaceLast = 60f;
@@ -26,7 +26,7 @@ public class LevelManager : MonoBehaviour
             Destroy(transform.GetChild(i).gameObject);
         for(int i = 0; i < numOfSections; i++)
         {
-            var section = Instantiate(sectionPrefab, transform);
+            var section = Instantiate(RandomSection(), transform);
             var tunnelSection = section.GetComponent<TunnelSection>();
             tunnelSection.Place(new Vector3(0f, 0f, i * tunnelSection.Length), Quaternion.identity, i >= initialSectionWithoutObstacles);
             sections.Enqueue(tunnelSection);
@@ -55,5 +55,11 @@ public class LevelManager : MonoBehaviour
             Quaternion.identity);
         lastSection = first;
         sections.Enqueue(first);
+    }
+
+    private GameObject RandomSection()
+    {
+        int rnd = Random.Range(0, sectionPrefabs.Length);
+        return sectionPrefabs[rnd];
     }
 }
