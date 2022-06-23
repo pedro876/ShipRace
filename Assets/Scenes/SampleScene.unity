@@ -260,7 +260,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 3.4, z: -11.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -663,7 +663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sectionPrefab: {fileID: 6944784635646536915, guid: 1c19389b7fa5c0b4885b700bb3848967,
     type: 3}
-  numOfSections: 30
+  numOfSections: 100
   sectionLength: 20
 --- !u!1 &832575517
 GameObject:
@@ -784,7 +784,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: a1ea671f66dd3f742b46cd945e17ba08,
         type: 3}
       propertyPath: m_Name
-      value: Ship
+      value: PlayerShip
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a1ea671f66dd3f742b46cd945e17ba08,
         type: 3}
@@ -831,7 +831,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2027e8c737600b04d83b7dae0b27efea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  zSpeed: 40
+  xySpeed: 30
+  maxHorizontalAngle: 25
+  maxVerticalAngle: 25
 --- !u!54 &1745030242
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -848,6 +851,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1745030245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745030234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ae5cfc91f9347e49921bbeb55524237, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftAxisLerpFactor: 10
+  leftAxisExponent: 1.2
+  maxVerticalGyroAngle: 15
+  maxHorizontalGyroAngle: 15
 --- !u!1 &1807569809
 GameObject:
   m_ObjectHideFlags: 0

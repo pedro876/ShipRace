@@ -6,11 +6,11 @@ using System;
 
 public class GyroFacade : MonoBehaviour
 {
-    public Quaternion RawAttitude => gyroEnabled ? GyroToUnity() : Quaternion.identity;
+    public Quaternion RawAttitude => working ? GyroToUnity() : Quaternion.identity;
     public Quaternion Attitude => gyroRef * RawAttitude;
-    public bool gyroEnabled { get; private set; } = false;
+    public bool working { get; private set; } = false;
 
-    public event Action onGyroEnabled;
+    public event Action onGyroConnected;
     Quaternion correctionQuaternion;
     Quaternion gyroRef;
 
@@ -38,10 +38,10 @@ public class GyroFacade : MonoBehaviour
         {
             InputSystem.EnableDevice(UnityEngine.InputSystem.Gyroscope.current);
             InputSystem.EnableDevice(AttitudeSensor.current);
-            if (!gyroEnabled)
+            if (!working)
             {
-                gyroEnabled = true;
-                onGyroEnabled?.Invoke();
+                working = true;
+                onGyroConnected?.Invoke();
             }
         }
     }

@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float speed = 10f;
+    [SerializeField] float zSpeed = 10f;
+    [SerializeField] float xySpeed = 3f;
+    [SerializeField] float maxHorizontalAngle = 45f;
+    [SerializeField] float maxVerticalAngle = 45f;
     Rigidbody rb;
-    GyroFacade gyro;
+
+    PlayerInputFacade input;
 
     private void Awake()
     {
-        gyro = FindObjectOfType<GyroFacade>();
+        input = GetComponent<PlayerInputFacade>();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -23,7 +27,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.rotation = gyro.Attitude;
-        rb.velocity = transform.forward * speed;
+        //transform.rotation = gyro.Attitude;
+        //rb.velocity = transform.forward * speed;
+
+        Quaternion horizontalRot = Quaternion.AngleAxis(input.leftAxis.x * maxHorizontalAngle, -Vector3.forward);
+        Quaternion verticalRot = Quaternion.AngleAxis(input.leftAxis.y * maxVerticalAngle, -Vector3.right);
+
+        transform.rotation = horizontalRot * verticalRot;
+
+        Vector3 speed = transform.forward * zSpeed + Vector3.right * input.leftAxis.x * xySpeed;
+        rb.velocity = speed;
     }
 }
