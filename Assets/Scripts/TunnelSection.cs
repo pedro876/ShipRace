@@ -4,22 +4,29 @@ using UnityEngine;
 
 public class TunnelSection : MonoBehaviour
 {
-    [SerializeField] float length = 60f;
+    [SerializeField] Transform tunnelEnd;
     [SerializeField] List<GameObject> obstaclePrefabs;
     [SerializeField] Transform[] obstaclePoints;
     List<GameObject> obstacles;
+    Quaternion originalRotation;
 
-    public float Length => length;
+    public Rail rail { get; private set; }
+
+    //public float Length => length;
+
+    public Transform TunnelEnd => tunnelEnd;
 
     private void Awake()
     {
         obstacles = new List<GameObject>();
+        rail = GetComponentInChildren<Rail>();
+        originalRotation = transform.rotation;
     }
 
     public void Place(Vector3 position, Quaternion rotation, bool withObstacles = true)
     {
-        transform.localPosition = position;
-        transform.localRotation = rotation;
+        transform.position = position;
+        transform.rotation = rotation * originalRotation;
         Randomize(withObstacles);
     }
 

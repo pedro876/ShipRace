@@ -7,11 +7,15 @@ public class CameraController : MonoBehaviour
     [SerializeField] Transform target;
     Vector3 distanceToTarget;
     GyroFacade gyro;
+    LevelManager level;
+    [SerializeField] float rotLerp = 10f;
+    [SerializeField] float posLerp = 10f;
 
     // Start is called before the first frame update
     void Awake()
     {
         gyro = FindObjectOfType<GyroFacade>();
+        level = FindObjectOfType<LevelManager>();
     }
 
     private void Start()
@@ -20,10 +24,13 @@ public class CameraController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        Vector3 camUp = Vector3.ProjectOnPlane(gyro.Attitude * Vector3.up, Vector3.forward);
-        transform.rotation = Quaternion.LookRotation(Vector3.forward, camUp);
-        transform.position = target.position + distanceToTarget;
+        level.currentSection.rail.Project(transform.position, out var projPos, out var projRot);
+        Vector3 camUp = Vector3.ProjectOnPlane(gyro.Attitude * projRot * Vector3.up, projRot * Vector3.forward);
+        Quaternion targetRot = Quaternion.LookRotation(projRot * Vector3.forward, camUp);
+        Vector3 targetPos = target.position + projRot * distanceToTarget;
+        transform.position = Vector3.Lerp(transform.position, targetPos, posLerp * Time.fixedDeltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, rotLerp * Time.fixedDeltaTime);
     }
 }

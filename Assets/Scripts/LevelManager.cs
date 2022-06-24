@@ -9,9 +9,11 @@ public class LevelManager : MonoBehaviour
     [SerializeField] GameObject[] sectionPrefabs;
     [SerializeField] int numOfSections = 3;
     [SerializeField] int initialSectionWithoutObstacles = 3;
-    [SerializeField] float distanceToReplaceLast = 60f;
+    //[SerializeField] float distanceToReplaceLast = 60f;
     Queue<TunnelSection> sections;
     TunnelSection lastSection;
+
+    public TunnelSection currentSection => sections.Peek();
 
     private void Awake()
     {
@@ -27,20 +29,27 @@ public class LevelManager : MonoBehaviour
         for(int i = 0; i < numOfSections; i++)
         {
             var section = Instantiate(RandomSection(), transform);
+            section.name = section.name + i;
             var tunnelSection = section.GetComponent<TunnelSection>();
-            tunnelSection.Place(new Vector3(0f, 0f, i * tunnelSection.Length), Quaternion.identity, i >= initialSectionWithoutObstacles);
+            if(i == 0)
+            {
+                tunnelSection.Place(transform.position, transform.rotation, i >= initialSectionWithoutObstacles);
+            }
+            else
+            {
+                tunnelSection.Place(lastSection.TunnelEnd.position, lastSection.TunnelEnd.rotation, i >= initialSectionWithoutObstacles);
+            }
+            
             sections.Enqueue(tunnelSection);
-            if(i == numOfSections-1)
-                lastSection = tunnelSection;
+            lastSection = tunnelSection;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        var currentSection = sections.Peek();
-
-        if(player.transform.position.z > currentSection.transform.position.z + distanceToReplaceLast)
+        Debug.Log(currentSection.gameObject.name);
+        if(currentSection.TunnelEnd.InverseTransformPoint(player.position).z > 0f)
         {
             ReplaceFirstToLast();
         }
@@ -50,9 +59,7 @@ public class LevelManager : MonoBehaviour
     {
         //var first = sections.First;
         var first = sections.Dequeue();
-        first.Place(
-            lastSection.transform.localPosition + Vector3.forward * (lastSection.Length / 2f + first.Length / 2f),
-            Quaternion.identity);
+        first.Place(lastSection.TunnelEnd.position, lastSection.TunnelEnd.rotation);
         lastSection = first;
         sections.Enqueue(first);
     }
