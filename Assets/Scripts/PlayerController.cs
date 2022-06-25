@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float ySpeed = 20f;
     [SerializeField] float maxHorizontalAngle = 45f;
     [SerializeField] float maxVerticalAngle = 45f;
+    [SerializeField] float projRotLerp = 10f;
     Rigidbody rb;
 
     PlayerInputFacade input;
@@ -21,18 +22,20 @@ public class PlayerController : MonoBehaviour
         input = GetComponent<PlayerInputFacade>();
         rb = GetComponent<Rigidbody>();
         level = FindObjectOfType<LevelManager>();
+        RailRotation = transform.rotation;
     }
 
     private void FixedUpdate()
     {
         level.currentSection.rail.Project(transform.position, out var projPos, out var projRot);
         RailPosition = projPos;
-        RailRotation = projRot;
+        RailRotation = Quaternion.Lerp(RailRotation, projRot, projRotLerp * Time.fixedDeltaTime);
 
         Quaternion horizontalRot = Quaternion.AngleAxis(input.leftAxis.x * maxHorizontalAngle, -Vector3.forward);
         Quaternion verticalRot = Quaternion.AngleAxis(input.leftAxis.y * maxVerticalAngle, -Vector3.right);
 
-        rb.MoveRotation(projRot * horizontalRot * verticalRot);
+        Quaternion targetRot = RailRotation * horizontalRot * verticalRot;
+        rb.MoveRotation(targetRot);
         //transform.rotation = horizontalRot * verticalRot;
 
         Vector3 speed = new Vector3(input.leftAxis.x * xSpeed, input.leftAxis.y * ySpeed, zSpeed);

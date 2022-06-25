@@ -834,8 +834,9 @@ MonoBehaviour:
   - {fileID: 345453334236637126, guid: 7591f8dc49a3899499decce691d27b5b, type: 3}
   - {fileID: 4965167116037182982, guid: e4d52433446ba0046965a5e54e1c1732, type: 3}
   - {fileID: 2593611664064522505, guid: 65f7677e9dedbdb4b98e61216a981b15, type: 3}
-  numOfSections: 20
+  numOfSections: 5
   initialSectionWithoutObstacles: 4
+  delaySectionReplacement: 1
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1282,11 +1283,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2027e8c737600b04d83b7dae0b27efea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zSpeed: 100
-  xSpeed: 30
-  ySpeed: 20
+  zSpeed: 50
+  xSpeed: 40
+  ySpeed: 30
   maxHorizontalAngle: 25
   maxVerticalAngle: 15
+  projRotLerp: 10
 --- !u!54 &1745030242
 Rigidbody:
   m_ObjectHideFlags: 0

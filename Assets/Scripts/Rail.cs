@@ -16,6 +16,7 @@ public class Rail : MonoBehaviour
     void Awake()
     {
         line = GetComponent<LineRenderer>();
+        line.enabled = false;
         distancesToStart = new float[line.positionCount];
         lineDirections = new Vector3[line.positionCount];
         distancesToStart[0] = 0f;

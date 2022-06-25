@@ -27,7 +27,7 @@ public class CameraController : MonoBehaviour
     void FixedUpdate()
     {
         level.currentSection.rail.Project(transform.position, out var projPos, out var projRot);
-        Vector3 camUp = Vector3.ProjectOnPlane(gyro.Attitude * projRot * Vector3.up, projRot * Vector3.forward);
+        Vector3 camUp = Vector3.ProjectOnPlane(projRot * gyro.Attitude * Vector3.up, projRot * Vector3.forward);
         Quaternion targetRot = Quaternion.LookRotation(projRot * Vector3.forward, camUp);
         Vector3 targetPos = target.position + projRot * distanceToTarget;
         transform.position = Vector3.Lerp(transform.position, targetPos, posLerp * Time.fixedDeltaTime);

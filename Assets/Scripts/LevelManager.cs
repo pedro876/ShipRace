@@ -9,6 +9,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] GameObject[] sectionPrefabs;
     [SerializeField] int numOfSections = 3;
     [SerializeField] int initialSectionWithoutObstacles = 3;
+    [SerializeField] int delaySectionReplacement = 1;
+    Queue<TunnelSection> sectionsToReplace;
     //[SerializeField] float distanceToReplaceLast = 60f;
     Queue<TunnelSection> sections;
     TunnelSection lastSection;
@@ -24,6 +26,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         sections = new Queue<TunnelSection>();
+        sectionsToReplace = new Queue<TunnelSection>();
         for (int i = 0; i < transform.childCount; i++)
             Destroy(transform.GetChild(i).gameObject);
         for(int i = 0; i < numOfSections; i++)
@@ -57,11 +60,18 @@ public class LevelManager : MonoBehaviour
 
     private void ReplaceFirstToLast()
     {
-        //var first = sections.First;
         var first = sections.Dequeue();
-        first.Place(lastSection.TunnelEnd.position, lastSection.TunnelEnd.rotation);
-        lastSection = first;
-        sections.Enqueue(first);
+        //first.Place(lastSection.TunnelEnd.position, lastSection.TunnelEnd.rotation);
+        sectionsToReplace.Enqueue(first);
+        if(sectionsToReplace.Count > delaySectionReplacement)
+        {
+            var sectionToReplace = sectionsToReplace.Dequeue();
+            sections.Enqueue(sectionToReplace);
+            sectionToReplace.Place(lastSection.TunnelEnd.position, lastSection.TunnelEnd.rotation);
+            lastSection = sectionToReplace;
+        }
+        //lastSection = first;
+        //sections.Enqueue(first);
     }
 
     private GameObject RandomSection()
