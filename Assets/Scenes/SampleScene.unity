@@ -1282,7 +1282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2027e8c737600b04d83b7dae0b27efea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zSpeed: 10
+  zSpeed: 100
   xSpeed: 30
   ySpeed: 20
   maxHorizontalAngle: 25

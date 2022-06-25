@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1648731328
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1648731329}
+  m_Layer: 0
+  m_Name: TunnelStart (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1648731329
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648731328}
+  m_LocalRotation: {x: 0.00000001545431, y: -0.00000001545431, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5139809870797158745}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5485267200423584739
 GameObject:
   m_ObjectHideFlags: 0
@@ -33,6 +64,7 @@ Transform:
   m_Children:
   - {fileID: 6420279787273581943}
   - {fileID: 9075005931541941054}
+  - {fileID: 1648731329}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
@@ -125,14 +157,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6291391838283495335}
-  m_LocalRotation: {x: -0.0000007247322, y: -0.7071067, z: -0.0000006536252, w: 0.7071069}
+  m_LocalRotation: {x: 0.49999925, y: -0.5000006, z: -0.50000024, w: 0.49999988}
   m_LocalPosition: {x: -136.6928, y: 0, z: 156.2599}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5139809870797158745}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: -90}
 --- !u!1 &9075005931541941049
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,5 +320,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fb48e27cc96582409272f64c0965202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  railStartRot: {fileID: 5139809870797158745}
+  railStartRot: {fileID: 1648731329}
   railEndRot: {fileID: 6420279787273581943}

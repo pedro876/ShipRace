@@ -23,21 +23,9 @@ public class PlayerController : MonoBehaviour
         level = FindObjectOfType<LevelManager>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void FixedUpdate()
     {
-        level.currentSection.rail.Project(rb.position, out var projPos, out var projRot);
+        level.currentSection.rail.Project(transform.position, out var projPos, out var projRot);
         RailPosition = projPos;
         RailRotation = projRot;
 
