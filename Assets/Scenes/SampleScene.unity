@@ -438,7 +438,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efe0661543d2a2f44a96cf3f3cadea9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1745030237}
   rotLerp: 15
   posLerp: 30
 --- !u!1 &410087039
@@ -1265,12 +1264,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1350200362}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1745030237 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a1ea671f66dd3f742b46cd945e17ba08,
-    type: 3}
-  m_PrefabInstance: {fileID: 1350200362}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1745030241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1283,7 +1276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2027e8c737600b04d83b7dae0b27efea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zSpeed: 50
+  zSpeed: 10
   xSpeed: 40
   ySpeed: 30
   maxHorizontalAngle: 25
