@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] Transform railPoint;
     [SerializeField] float zSpeed = 10f;
     [SerializeField] float xSpeed = 30f;
     [SerializeField] float ySpeed = 20f;
@@ -42,6 +43,9 @@ public class PlayerController : MonoBehaviour
         //rb.AddForce(speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
         //Debug.Log(rb.velocity.magnitude);
         rb.velocity = projRot * speed;
+
+        railPoint.position = RailPosition;
+        railPoint.rotation = RailRotation;
 
         /*rb.MovePosition(new Vector3(input.leftAxis.x * xSpeed, input.leftAxis.y * ySpeed, 0f) * Time.fixedDeltaTime);
         rb.MovePosition(Vector3.forward * zSpeed * Time.fixedDeltaTime);
