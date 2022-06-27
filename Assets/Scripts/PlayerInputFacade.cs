@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerInputFacade : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class PlayerInputFacade : MonoBehaviour
     [SerializeField] float maxHorizontalGyroAngle = 45f;
     public Vector2 rawLeftAxis { get; private set; }
     public Vector2 leftAxis { get; private set; }
+    public event Action dashRight;
+    public event Action dashLeft;
     //private float leftAxisX;
     //private float leftAxisY;
 
@@ -21,6 +24,8 @@ public class PlayerInputFacade : MonoBehaviour
     {
         gyro = FindObjectOfType<GyroFacade>();
         controls = new GameControls();
+        controls.ShipControls.DashRight.started += ctx => dashRight();
+        controls.ShipControls.DashLeft.started += ctx => dashLeft();
     }
 
     private void OnEnable()

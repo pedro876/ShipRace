@@ -44,6 +44,24 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DashRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""a6c30a8c-886e-4582-b0b2-f7618ab91d74"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DashLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""213ba522-8330-4267-8180-572f47e5dfaa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -200,6 +218,61 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""action"": ""LeftVerticalAxis"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""03ce65d1-625f-421a-8b6e-39f62d43c54a"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DashRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eac20f14-62a4-4cc5-aa89-1fa666ce9bf4"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DashRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9a0b037c-7b79-470f-a359-015052f3cd8c"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": ""MultiTap"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DashRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cbc2282d-3f69-4075-bf75-6e3dafe97ccd"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DashLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""55be2ab4-3950-4fa8-93b4-bd5b376db06a"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DashLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -210,6 +283,8 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
         m_ShipControls = asset.FindActionMap("ShipControls", throwIfNotFound: true);
         m_ShipControls_LeftHorizontalAxis = m_ShipControls.FindAction("LeftHorizontalAxis", throwIfNotFound: true);
         m_ShipControls_LeftVerticalAxis = m_ShipControls.FindAction("LeftVerticalAxis", throwIfNotFound: true);
+        m_ShipControls_DashRight = m_ShipControls.FindAction("DashRight", throwIfNotFound: true);
+        m_ShipControls_DashLeft = m_ShipControls.FindAction("DashLeft", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -271,12 +346,16 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
     private IShipControlsActions m_ShipControlsActionsCallbackInterface;
     private readonly InputAction m_ShipControls_LeftHorizontalAxis;
     private readonly InputAction m_ShipControls_LeftVerticalAxis;
+    private readonly InputAction m_ShipControls_DashRight;
+    private readonly InputAction m_ShipControls_DashLeft;
     public struct ShipControlsActions
     {
         private @GameControls m_Wrapper;
         public ShipControlsActions(@GameControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @LeftHorizontalAxis => m_Wrapper.m_ShipControls_LeftHorizontalAxis;
         public InputAction @LeftVerticalAxis => m_Wrapper.m_ShipControls_LeftVerticalAxis;
+        public InputAction @DashRight => m_Wrapper.m_ShipControls_DashRight;
+        public InputAction @DashLeft => m_Wrapper.m_ShipControls_DashLeft;
         public InputActionMap Get() { return m_Wrapper.m_ShipControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -292,6 +371,12 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                 @LeftVerticalAxis.started -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnLeftVerticalAxis;
                 @LeftVerticalAxis.performed -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnLeftVerticalAxis;
                 @LeftVerticalAxis.canceled -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnLeftVerticalAxis;
+                @DashRight.started -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnDashRight;
+                @DashRight.performed -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnDashRight;
+                @DashRight.canceled -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnDashRight;
+                @DashLeft.started -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnDashLeft;
+                @DashLeft.performed -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnDashLeft;
+                @DashLeft.canceled -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnDashLeft;
             }
             m_Wrapper.m_ShipControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -302,6 +387,12 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                 @LeftVerticalAxis.started += instance.OnLeftVerticalAxis;
                 @LeftVerticalAxis.performed += instance.OnLeftVerticalAxis;
                 @LeftVerticalAxis.canceled += instance.OnLeftVerticalAxis;
+                @DashRight.started += instance.OnDashRight;
+                @DashRight.performed += instance.OnDashRight;
+                @DashRight.canceled += instance.OnDashRight;
+                @DashLeft.started += instance.OnDashLeft;
+                @DashLeft.performed += instance.OnDashLeft;
+                @DashLeft.canceled += instance.OnDashLeft;
             }
         }
     }
@@ -310,5 +401,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
     {
         void OnLeftHorizontalAxis(InputAction.CallbackContext context);
         void OnLeftVerticalAxis(InputAction.CallbackContext context);
+        void OnDashRight(InputAction.CallbackContext context);
+        void OnDashLeft(InputAction.CallbackContext context);
     }
 }
