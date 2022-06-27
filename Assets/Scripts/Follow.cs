@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class Follow : MonoBehaviour
 {
+    public enum UpdateMethod
+    {
+        Update,
+        LateUpdate,
+        FixedUpdate
+    }
+
     [SerializeField] Transform[] targets;
+    [SerializeField] UpdateMethod updateMethod = UpdateMethod.FixedUpdate;
     [Header("Properties to follow")]
     [SerializeField] bool followPositionX = true;
     [SerializeField] bool followPositionY = true;
@@ -48,9 +56,6 @@ public class Follow : MonoBehaviour
         for(int i = 0; i < targets.Length; i++)
         {
             displacements[i] = targets[i].InverseTransformDirection(transform.position - targets[i].position);
-            //rotations[i] = Quaternion.LookRotation(
-            //targets[i].InverseTransformDirection(transform.forward),
-            //targets[i].InverseTransformDirection(transform.up));
             forwards[i] = targets[i].InverseTransformDirection(transform.forward);
             ups[i] = targets[i].InverseTransformDirection(transform.up);
         }
@@ -90,12 +95,26 @@ public class Follow : MonoBehaviour
         SetTargets(new Transform[0]);
     }
 
-    private void LateUpdate()
+    private void Update()
     {
-        AverageTransform();
+    
+        if(updateMethod == UpdateMethod.Update)
+            AverageTransform(Time.deltaTime);
     }
 
-    private void AverageTransform(bool interpolate = true)
+    private void LateUpdate()
+    {
+        if (updateMethod == UpdateMethod.LateUpdate)
+            AverageTransform(Time.deltaTime);
+    }
+
+    private void FixedUpdate()
+    {
+        if (updateMethod == UpdateMethod.FixedUpdate)
+            AverageTransform(Time.fixedDeltaTime);
+    }
+
+    private void AverageTransform(float deltaTime, bool interpolate = true)
     {
         if (targets.Length <= 0)
             return;
@@ -107,13 +126,13 @@ public class Follow : MonoBehaviour
         for(int i = 0; i < targets.Length; i++)
         {
             if (followPosition)
-                position += CalculatePosition(i, interpolate);
+                position += CalculatePosition(i, interpolate, deltaTime);
             if (followRotation)
             {
-                rotation = Quaternion.Lerp(rotation, CalculateRotation(i, interpolate), 1f/(i+1f));
+                rotation = Quaternion.Lerp(rotation, CalculateRotation(i, interpolate, deltaTime), 1f/(i+1f));
             }
             if (followScale)
-                scale += CalculateScale(i, interpolate);
+                scale += CalculateScale(i, interpolate, deltaTime);
         }
 
         position /= targets.Length;
@@ -133,12 +152,12 @@ public class Follow : MonoBehaviour
             transform.localScale = scale;
     }
 
-    private Vector3 CalculatePosition(int index, bool interpolate)
+    private Vector3 CalculatePosition(int index, bool interpolate, float deltaTime)
     {
         Vector3 targetPos = targets[index].position + targets[index].TransformDirection(displacements[index]);
         if (positionLerp && interpolate)
         {
-            return Vector3.Lerp(transform.position, targetPos, positionLerpFactor * Time.deltaTime);
+            return Vector3.Lerp(transform.position, targetPos, positionLerpFactor * deltaTime);
         }
         else
         {
@@ -146,13 +165,13 @@ public class Follow : MonoBehaviour
         }
     }
 
-    private Quaternion CalculateRotation(int index, bool interpolate)
+    private Quaternion CalculateRotation(int index, bool interpolate, float deltaTime)
     {
         Quaternion targetRot = Quaternion.LookRotation(targets[index].TransformDirection(forwards[index]),
             targets[index].TransformDirection(ups[index]));
         if (rotationLerp && interpolate)
         {
-            return Quaternion.Lerp(transform.rotation, targetRot, rotationLerpFactor * Time.deltaTime);
+            return Quaternion.Lerp(transform.rotation, targetRot, rotationLerpFactor * deltaTime);
         }
         else
         {
@@ -160,11 +179,11 @@ public class Follow : MonoBehaviour
         }
     }
 
-    private Vector3 CalculateScale(int index, bool interpolate)
+    private Vector3 CalculateScale(int index, bool interpolate, float deltaTime)
     {
         if (scaleLerp && interpolate)
         {
-            return Vector3.Lerp(transform.localScale, targets[index].localScale, scaleLerpFactor * Time.deltaTime);
+            return Vector3.Lerp(transform.localScale, targets[index].localScale, scaleLerpFactor * deltaTime);
         }
         else
         {
@@ -174,6 +193,6 @@ public class Follow : MonoBehaviour
 
     private void OnEnable()
     {
-        AverageTransform(false);
+        AverageTransform(Time.deltaTime, false);
     }
 }

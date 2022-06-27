@@ -8,6 +8,7 @@ public class TunnelColliderFollow : MonoBehaviour
     [SerializeField] PlayerController player;
 
     Rigidbody rb;
+    [SerializeField] float rotLerp = 8f;
 
     private void Awake()
     {
@@ -19,6 +20,6 @@ public class TunnelColliderFollow : MonoBehaviour
     void FixedUpdate()
     {
         rb.MovePosition(player.RailPosition);
-        rb.MoveRotation(player.RailRotation);
+        rb.MoveRotation(Quaternion.Lerp(transform.rotation, player.RailRotation, rotLerp * Time.fixedDeltaTime));
     }
 }

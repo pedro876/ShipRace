@@ -6,14 +6,19 @@ public class LevelManager : MonoBehaviour
 {
     Transform player;
 
+    [SerializeField] GameObject initSection;
     [SerializeField] GameObject[] sectionPrefabs;
+    [SerializeField] GameObject[] curvePrefabs;
     [SerializeField] int numOfSections = 3;
-    [SerializeField] int initialSectionWithoutObstacles = 3;
+    [SerializeField] int sectionsBetweenCurves = 10;
+    [SerializeField] int initialSectionsWithoutObstacles = 3;
     [SerializeField] int delaySectionReplacement = 1;
-    Queue<TunnelSection> sectionsToReplace;
     //[SerializeField] float distanceToReplaceLast = 60f;
+    Queue<TunnelSection> sectionsToRemove;
     Queue<TunnelSection> sections;
     TunnelSection lastSection;
+    int sectionIndex = 0;
+    int sectionType = 0;
 
     public TunnelSection currentSection => sections.Peek();
 
@@ -26,12 +31,13 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         sections = new Queue<TunnelSection>();
-        sectionsToReplace = new Queue<TunnelSection>();
+        sectionsToRemove = new Queue<TunnelSection>();
         for (int i = 0; i < transform.childCount; i++)
             Destroy(transform.GetChild(i).gameObject);
         for(int i = 0; i < numOfSections; i++)
         {
-            var section = Instantiate(RandomSection(), transform);
+            AddSection();
+            /*var section = Instantiate(RandomSection(), transform);
             section.name = section.name + i;
             var tunnelSection = section.GetComponent<TunnelSection>();
             if(i == 0)
@@ -44,39 +50,80 @@ public class LevelManager : MonoBehaviour
             }
             
             sections.Enqueue(tunnelSection);
-            lastSection = tunnelSection;
+            lastSection = tunnelSection;*/
+
         }
+    }
+
+    private void AddSection()
+    {
+        GameObject sectionObj;
+        TunnelSection section;
+        Vector3 pos;
+        Quaternion rot;
+        if(sectionIndex == 0) //Init
+        {
+            sectionObj = Instantiate(initSection, transform);
+            sectionType = Random.Range(0, sectionPrefabs.Length);
+            pos = transform.position;
+            rot = transform.rotation;
+        }
+        else
+        {
+            if (sectionIndex % sectionsBetweenCurves == 0) //Curve
+            {
+                var curve = RandomSection(curvePrefabs);
+                sectionObj = Instantiate(curve, transform);
+                sectionType = Random.Range(0, sectionPrefabs.Length);
+            }
+            else //Normal section
+            {
+                sectionObj = Instantiate(sectionPrefabs[sectionType], transform);
+            }
+            pos = lastSection.TunnelEnd.position;
+            rot = lastSection.TunnelEnd.rotation;
+        }
+
+        sectionObj.name = "Section_" + sectionIndex;
+        section = sectionObj.GetComponent<TunnelSection>();
+        section.Place(pos, rot, sectionIndex % sectionsBetweenCurves > initialSectionsWithoutObstacles);
+        sections.Enqueue(section);
+        lastSection = section;
+        sectionIndex++;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(currentSection.gameObject.name);
+        //Debug.Log(currentSection.gameObject.name);
         if(currentSection.TunnelEnd.InverseTransformPoint(player.position).z > 0f)
         {
-            ReplaceFirstToLast();
+            RemoveFirstSection();
         }
     }
 
-    private void ReplaceFirstToLast()
+    private void RemoveFirstSection()
     {
         var first = sections.Dequeue();
         //first.Place(lastSection.TunnelEnd.position, lastSection.TunnelEnd.rotation);
-        sectionsToReplace.Enqueue(first);
-        if(sectionsToReplace.Count > delaySectionReplacement)
+        sectionsToRemove.Enqueue(first);
+        if(sectionsToRemove.Count > delaySectionReplacement)
         {
-            var sectionToReplace = sectionsToReplace.Dequeue();
-            sections.Enqueue(sectionToReplace);
+            var sectionToRemove = sectionsToRemove.Dequeue();
+            Destroy(sectionToRemove.gameObject);
+            AddSection();
+            /*sections.Enqueue(sectionToReplace);
             sectionToReplace.Place(lastSection.TunnelEnd.position, lastSection.TunnelEnd.rotation);
-            lastSection = sectionToReplace;
+            lastSection = sectionToReplace;*/
         }
+
         //lastSection = first;
         //sections.Enqueue(first);
     }
 
-    private GameObject RandomSection()
+    private GameObject RandomSection(GameObject[] sectionList)
     {
-        int rnd = Random.Range(0, sectionPrefabs.Length);
-        return sectionPrefabs[rnd];
+        int rnd = Random.Range(0, sectionList.Length);
+        return sectionList[rnd];
     }
 }
