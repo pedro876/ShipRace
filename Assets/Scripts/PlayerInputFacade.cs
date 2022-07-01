@@ -19,13 +19,40 @@ public class PlayerInputFacade : MonoBehaviour
 
     GyroFacade gyro;
     GameControls controls;
+    float lastTouchPos = 0f;
+
+    public float turning { get; private set; }
 
     private void Awake()
     {
         gyro = FindObjectOfType<GyroFacade>();
         controls = new GameControls();
-        controls.ShipControls.DashRight.started += ctx => dashRight();
-        controls.ShipControls.DashLeft.started += ctx => dashLeft();
+        controls.ShipControls.DashRight.performed += ctx => dashRight?.Invoke();
+        controls.ShipControls.DashLeft.performed += ctx => dashLeft?.Invoke();
+        controls.ShipControls.DashTouch.performed += ctx =>
+        {
+            if(lastTouchPos > Screen.width / 2)
+            {
+                dashRight?.Invoke();
+            }
+            else
+            {
+                dashLeft?.Invoke();
+            }
+        };
+        controls.ShipControls.TouchPos.performed += ctx =>
+        {
+            Vector2 pos = ctx.ReadValue<Vector2>();
+            turning = (pos.x / Screen.width) * 2f - 1f;
+            turning = Mathf.Pow(Mathf.Abs(turning), 0.5f) * Mathf.Sign(turning);
+            lastTouchPos = pos.x;
+        };
+        controls.ShipControls.StopTouch.canceled += ctx =>
+        {
+            turning = 0f;
+        };
+        controls.ShipControls.Turning.performed += ctx => turning = ctx.ReadValue<float>();
+        controls.ShipControls.Turning.canceled += ctx => turning = 0f;
     }
 
     private void OnEnable()

@@ -6,7 +6,7 @@ public class TunnelSection : MonoBehaviour
 {
     [SerializeField] Transform tunnelEnd;
     [SerializeField] List<GameObject> obstaclePrefabs;
-    [SerializeField] Transform[] obstaclePoints;
+    /*[SerializeField] */Transform obstaclePoint;
     List<GameObject> obstacles;
     Quaternion originalRotation;
 
@@ -21,6 +21,9 @@ public class TunnelSection : MonoBehaviour
         obstacles = new List<GameObject>();
         rail = GetComponentInChildren<Rail>();
         originalRotation = transform.rotation;
+        obstaclePoint = transform;
+        /*if (obstaclePoint == null)
+            obstaclePoint = transform;*/
     }
 
     public void Place(Vector3 position, Quaternion rotation, bool withObstacles = true)
@@ -38,15 +41,14 @@ public class TunnelSection : MonoBehaviour
         }
         obstacles.Clear();
 
-        if (withObstacles)
+        if (withObstacles && obstaclePoint != null)
         {
-            foreach (var point in obstaclePoints)
-            {
-                int rnd = Random.Range(0, obstaclePrefabs.Count);
-                var obstacle = Instantiate(obstaclePrefabs[rnd], point, true);
-                obstacle.transform.localPosition = Vector3.zero;
-                obstacles.Add(obstacle);
-            }
+            int rnd = Random.Range(0, obstaclePrefabs.Count);
+            var obstacle = Instantiate(obstaclePrefabs[rnd], obstaclePoint, true);
+            obstacle.transform.localPosition = Vector3.zero;
+            int rndRot = Random.Range(0, 4);
+            obstacle.transform.localRotation = Quaternion.Euler(0f, 0f, 90f * rndRot);
+            obstacles.Add(obstacle);
         }
     }
 }

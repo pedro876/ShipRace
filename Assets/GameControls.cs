@@ -62,6 +62,42 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DashTouch"",
+                    ""type"": ""Button"",
+                    ""id"": ""5807d3e8-3627-4ff0-b7dd-039b9828e747"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TouchPos"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""6c43129e-12e5-4d0e-b0e2-5bb178df3b70"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Turning"",
+                    ""type"": ""Value"",
+                    ""id"": ""d46fffc7-509d-425c-a95a-6fe583163779"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""StopTouch"",
+                    ""type"": ""Button"",
+                    ""id"": ""0e829560-b258-40e3-9d84-81a602999058"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -243,17 +279,6 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""9a0b037c-7b79-470f-a359-015052f3cd8c"",
-                    ""path"": ""<Touchscreen>/Press"",
-                    ""interactions"": ""MultiTap"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""DashRight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""cbc2282d-3f69-4075-bf75-6e3dafe97ccd"",
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
@@ -273,6 +298,50 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""action"": ""DashLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9a0b037c-7b79-470f-a359-015052f3cd8c"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": ""MultiTap"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DashTouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""60b7257a-2b30-4fb4-9b9d-6d5534757397"",
+                    ""path"": ""<Touchscreen>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TouchPos"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a70ddbf1-7439-469d-84d6-33a0935c7ee1"",
+                    ""path"": ""<Gamepad>/rightStick/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Turning"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cc1d53dc-c343-436f-a2bd-4c119eff32d8"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StopTouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -285,6 +354,10 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
         m_ShipControls_LeftVerticalAxis = m_ShipControls.FindAction("LeftVerticalAxis", throwIfNotFound: true);
         m_ShipControls_DashRight = m_ShipControls.FindAction("DashRight", throwIfNotFound: true);
         m_ShipControls_DashLeft = m_ShipControls.FindAction("DashLeft", throwIfNotFound: true);
+        m_ShipControls_DashTouch = m_ShipControls.FindAction("DashTouch", throwIfNotFound: true);
+        m_ShipControls_TouchPos = m_ShipControls.FindAction("TouchPos", throwIfNotFound: true);
+        m_ShipControls_Turning = m_ShipControls.FindAction("Turning", throwIfNotFound: true);
+        m_ShipControls_StopTouch = m_ShipControls.FindAction("StopTouch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -348,6 +421,10 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_ShipControls_LeftVerticalAxis;
     private readonly InputAction m_ShipControls_DashRight;
     private readonly InputAction m_ShipControls_DashLeft;
+    private readonly InputAction m_ShipControls_DashTouch;
+    private readonly InputAction m_ShipControls_TouchPos;
+    private readonly InputAction m_ShipControls_Turning;
+    private readonly InputAction m_ShipControls_StopTouch;
     public struct ShipControlsActions
     {
         private @GameControls m_Wrapper;
@@ -356,6 +433,10 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
         public InputAction @LeftVerticalAxis => m_Wrapper.m_ShipControls_LeftVerticalAxis;
         public InputAction @DashRight => m_Wrapper.m_ShipControls_DashRight;
         public InputAction @DashLeft => m_Wrapper.m_ShipControls_DashLeft;
+        public InputAction @DashTouch => m_Wrapper.m_ShipControls_DashTouch;
+        public InputAction @TouchPos => m_Wrapper.m_ShipControls_TouchPos;
+        public InputAction @Turning => m_Wrapper.m_ShipControls_Turning;
+        public InputAction @StopTouch => m_Wrapper.m_ShipControls_StopTouch;
         public InputActionMap Get() { return m_Wrapper.m_ShipControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -377,6 +458,18 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                 @DashLeft.started -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnDashLeft;
                 @DashLeft.performed -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnDashLeft;
                 @DashLeft.canceled -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnDashLeft;
+                @DashTouch.started -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnDashTouch;
+                @DashTouch.performed -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnDashTouch;
+                @DashTouch.canceled -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnDashTouch;
+                @TouchPos.started -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnTouchPos;
+                @TouchPos.performed -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnTouchPos;
+                @TouchPos.canceled -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnTouchPos;
+                @Turning.started -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnTurning;
+                @Turning.performed -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnTurning;
+                @Turning.canceled -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnTurning;
+                @StopTouch.started -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnStopTouch;
+                @StopTouch.performed -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnStopTouch;
+                @StopTouch.canceled -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnStopTouch;
             }
             m_Wrapper.m_ShipControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -393,6 +486,18 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                 @DashLeft.started += instance.OnDashLeft;
                 @DashLeft.performed += instance.OnDashLeft;
                 @DashLeft.canceled += instance.OnDashLeft;
+                @DashTouch.started += instance.OnDashTouch;
+                @DashTouch.performed += instance.OnDashTouch;
+                @DashTouch.canceled += instance.OnDashTouch;
+                @TouchPos.started += instance.OnTouchPos;
+                @TouchPos.performed += instance.OnTouchPos;
+                @TouchPos.canceled += instance.OnTouchPos;
+                @Turning.started += instance.OnTurning;
+                @Turning.performed += instance.OnTurning;
+                @Turning.canceled += instance.OnTurning;
+                @StopTouch.started += instance.OnStopTouch;
+                @StopTouch.performed += instance.OnStopTouch;
+                @StopTouch.canceled += instance.OnStopTouch;
             }
         }
     }
@@ -403,5 +508,9 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
         void OnLeftVerticalAxis(InputAction.CallbackContext context);
         void OnDashRight(InputAction.CallbackContext context);
         void OnDashLeft(InputAction.CallbackContext context);
+        void OnDashTouch(InputAction.CallbackContext context);
+        void OnTouchPos(InputAction.CallbackContext context);
+        void OnTurning(InputAction.CallbackContext context);
+        void OnStopTouch(InputAction.CallbackContext context);
     }
 }

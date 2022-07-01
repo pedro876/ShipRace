@@ -37,21 +37,6 @@ public class LevelManager : MonoBehaviour
         for(int i = 0; i < numOfSections; i++)
         {
             AddSection();
-            /*var section = Instantiate(RandomSection(), transform);
-            section.name = section.name + i;
-            var tunnelSection = section.GetComponent<TunnelSection>();
-            if(i == 0)
-            {
-                tunnelSection.Place(transform.position, transform.rotation, i >= initialSectionWithoutObstacles);
-            }
-            else
-            {
-                tunnelSection.Place(lastSection.TunnelEnd.position, lastSection.TunnelEnd.rotation, i >= initialSectionWithoutObstacles);
-            }
-            
-            sections.Enqueue(tunnelSection);
-            lastSection = tunnelSection;*/
-
         }
     }
 
@@ -86,7 +71,7 @@ public class LevelManager : MonoBehaviour
 
         sectionObj.name = "Section_" + sectionIndex;
         section = sectionObj.GetComponent<TunnelSection>();
-        section.Place(pos, rot, sectionIndex % sectionsBetweenCurves > initialSectionsWithoutObstacles);
+        section.Place(pos, rot, sectionIndex > initialSectionsWithoutObstacles && sectionIndex % sectionsBetweenCurves != 1);
         sections.Enqueue(section);
         lastSection = section;
         sectionIndex++;

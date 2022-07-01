@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float maxHorizontalAngle = 45f;
     [SerializeField] float maxVerticalAngle = 45f;
     [SerializeField] float projRotLerp = 10f;
+    [SerializeField] float maxTurnAngle = 80f;
+    float turnAngle = 0f;
+    [SerializeField] float turnAngleLerp = 10f;
     Rigidbody rb;
     [SerializeField] float dashAngle = 1080f;
     [SerializeField] float dashSpeed = 10f;
@@ -59,6 +62,7 @@ public class PlayerController : MonoBehaviour
     {
         Quaternion targetRot = MoveShip();
         targetRot = CheckDash(targetRot);
+        targetRot = CheckTurning(targetRot);
         rb.MoveRotation(targetRot);
     }
 
@@ -104,5 +108,12 @@ public class PlayerController : MonoBehaviour
             rb.velocity += RailRotation * Vector3.right * speed;
         }
         return targetRot * Quaternion.Euler(0f, 0f, angle);
+    }
+
+    private Quaternion CheckTurning(Quaternion targetRot)
+    {
+        float angle = maxTurnAngle * -input.turning;
+        turnAngle = Mathf.Lerp(turnAngle, angle, turnAngleLerp * Time.fixedDeltaTime);
+        return targetRot * Quaternion.Euler(0f, 0f, turnAngle);
     }
 }
