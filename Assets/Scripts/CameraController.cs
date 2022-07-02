@@ -63,8 +63,8 @@ public class CameraController : MonoBehaviour
         }*/
         targetPos = playerRailPoint.TransformPoint(targetPosOnRail);
         //Debug.Log(targetPosOnRail.y);
-
-        transform.position = Vector3.Lerp(transform.position, targetPos, posLerp * Time.fixedDeltaTime);
+        transform.position = targetPos;
+        //transform.position = Vector3.Lerp(transform.position, targetPos, posLerp * Time.fixedDeltaTime);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, rotLerp * Time.fixedDeltaTime);
     }
 }

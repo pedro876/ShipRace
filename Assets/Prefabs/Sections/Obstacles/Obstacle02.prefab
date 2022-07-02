@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 5897799713628323503}
   - component: {fileID: 7383345934257123594}
   - component: {fileID: 4724871170701690304}
-  - component: {fileID: 6220466049092557145}
   - component: {fileID: 3469287836822613378}
   - component: {fileID: 3469287836822613379}
+  - component: {fileID: -8344838628708528416}
+  - component: {fileID: -2570308304425162233}
   m_Layer: 0
   m_Name: Obstacle02
   m_TagString: Untagged
@@ -64,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d64a14ddfb9ba994ca9fe160ea64ebf6, type: 2}
+  - {fileID: 2100000, guid: d142cc5b0f1f0ea4a92aba37ca3dcad8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86,20 +87,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6220466049092557145
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6526526457517646869}
-  m_Material: {fileID: 13400000, guid: 71d6c7d77fbd9a540b00e48c175e3c35, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 5832886383786274790, guid: 48b070333219f5b41859caa97712f04c, type: 3}
 --- !u!114 &3469287836822613378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,3 +118,31 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-8344838628708528416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6526526457517646869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5f8726bbf2c2d74a84c1639c9071dfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliderScale: 3
+  physicMat: {fileID: 13400000, guid: 71d6c7d77fbd9a540b00e48c175e3c35, type: 2}
+--- !u!64 &-2570308304425162233
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6526526457517646869}
+  m_Material: {fileID: 13400000, guid: 71d6c7d77fbd9a540b00e48c175e3c35, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5832886383786274790, guid: 48b070333219f5b41859caa97712f04c, type: 3}

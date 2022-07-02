@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float ySpeed = 20f;
     [SerializeField] float maxHorizontalAngle = 45f;
     [SerializeField] float maxVerticalAngle = 45f;
+    [SerializeField] float maxUpAngle = 45f;
     [SerializeField] float projRotLerp = 10f;
     [SerializeField] float maxTurnAngle = 80f;
     float turnAngle = 0f;
@@ -74,8 +75,9 @@ public class PlayerController : MonoBehaviour
 
         Quaternion horizontalRot = Quaternion.AngleAxis(input.leftAxis.x * maxHorizontalAngle, -Vector3.forward);
         Quaternion verticalRot = Quaternion.AngleAxis(input.leftAxis.y * maxVerticalAngle, -Vector3.right);
+        Quaternion upRot = Quaternion.AngleAxis(input.leftAxis.x * maxUpAngle, Vector3.up);
 
-        Quaternion targetRot = RailRotation * horizontalRot * verticalRot;
+        Quaternion targetRot = RailRotation * upRot * horizontalRot * verticalRot;
 
         Vector3 speed = new Vector3(input.leftAxis.x * xSpeed, input.leftAxis.y * ySpeed, zSpeed);
         rb.velocity = projRot * speed;
