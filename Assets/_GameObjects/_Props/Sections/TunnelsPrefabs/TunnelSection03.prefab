@@ -245,12 +245,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed70edd07da03b24db8fb1ca2e3ecbf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tunnelEnd: {fileID: 715447873579709815}
-  obstaclePrefabs:
-  - {fileID: 7989229174917478466, guid: cc112d62efb8aff408faf5d017b9190a, type: 3}
-  - {fileID: 6526526457517646869, guid: 42136f7d2e3b867449b1ae0dd3e69777, type: 3}
-  - {fileID: 8821485368222554432, guid: 42d88d6cf87e3a1428e50460e02d833a, type: 3}
-  - {fileID: 5082667548197929495, guid: eea59f77b4ed4c84a973d54fafb71334, type: 3}
 --- !u!1 &3249105304980518011
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,7 +256,7 @@ GameObject:
   - component: {fileID: 715447873579709815}
   m_Layer: 0
   m_Name: TunnelEnd.003
-  m_TagString: Untagged
+  m_TagString: TunnelEnd
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

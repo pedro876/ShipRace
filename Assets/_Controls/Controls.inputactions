@@ -33,24 +33,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "DashTouch",
-                    "type": "Button",
-                    "id": "5807d3e8-3627-4ff0-b7dd-039b9828e747",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "TouchPos",
-                    "type": "PassThrough",
-                    "id": "6c43129e-12e5-4d0e-b0e2-5bb178df3b70",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Tilt",
                     "type": "Value",
                     "id": "d46fffc7-509d-425c-a95a-6fe583163779",
@@ -60,18 +42,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "StopTouch",
+                    "name": "SlowDown",
                     "type": "Button",
-                    "id": "0e829560-b258-40e3-9d84-81a602999058",
+                    "id": "abfeeb80-4e2b-40e6-bf0e-89c65d8b23e7",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SlowDown",
+                    "name": "DashTouch",
                     "type": "Button",
-                    "id": "abfeeb80-4e2b-40e6-bf0e-89c65d8b23e7",
+                    "id": "5807d3e8-3627-4ff0-b7dd-039b9828e747",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -85,7 +67,7 @@
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard",
                     "action": "DashLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -96,7 +78,7 @@
                     "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "DashLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -105,21 +87,109 @@
                     "name": "",
                     "id": "9a0b037c-7b79-470f-a359-015052f3cd8c",
                     "path": "<Touchscreen>/Press",
-                    "interactions": "MultiTap",
+                    "interactions": "MultiTap(tapDelay=0.25)",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Mobile",
                     "action": "DashTouch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "60b7257a-2b30-4fb4-9b9d-6d5534757397",
-                    "path": "<Touchscreen>/position",
+                    "name": "WASD",
+                    "id": "e8f0155c-d3fd-4415-a4c1-d7dc56a20eef",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "TouchPos",
+                    "action": "SideMotion",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "8fc69e4f-ce01-4a98-9de1-bb51ed2ae3c9",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "SideMotion",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "86a35ef8-bf45-4487-96a0-56cdd4ab26f6",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "SideMotion",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "e974b07e-c4d3-496a-8629-bc7d4036c2ed",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "SideMotion",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "233ba7f0-1421-474c-831b-c8d7c5c9b9e6",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "SideMotion",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "de2aef51-60ff-43ac-81d5-3e08d83945c7",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "SideMotion",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "15507033-83a5-4241-a50d-1795c49e271d",
+                    "path": "<Gamepad>/dpad",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "SideMotion",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "03ce65d1-625f-421a-8b6e-39f62d43c54a",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "DashRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eac20f14-62a4-4cc5-aa89-1fa666ce9bf4",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "DashRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -129,7 +199,7 @@
                     "path": "<Gamepad>/rightStick/x",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "Tilt",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -151,7 +221,7 @@
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard",
                     "action": "Tilt",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -162,7 +232,7 @@
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard",
                     "action": "Tilt",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -184,7 +254,7 @@
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "Tilt",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -195,7 +265,7 @@
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "Tilt",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -217,7 +287,7 @@
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "Tilt",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -228,21 +298,10 @@
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "Tilt",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "cc1d53dc-c343-436f-a2bd-4c119eff32d8",
-                    "path": "<Touchscreen>/Press",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "StopTouch",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
@@ -250,90 +309,63 @@
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard",
                     "action": "SlowDown",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "WASD",
-                    "id": "e8f0155c-d3fd-4415-a4c1-d7dc56a20eef",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SideMotion",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "8fc69e4f-ce01-4a98-9de1-bb51ed2ae3c9",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SideMotion",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "86a35ef8-bf45-4487-96a0-56cdd4ab26f6",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SideMotion",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "e974b07e-c4d3-496a-8629-bc7d4036c2ed",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SideMotion",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "233ba7f0-1421-474c-831b-c8d7c5c9b9e6",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SideMotion",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "",
-                    "id": "03ce65d1-625f-421a-8b6e-39f62d43c54a",
-                    "path": "<Keyboard>/e",
+                    "id": "2ecbb973-9ad4-4d32-835c-ee73ade56cbb",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "DashRight",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "eac20f14-62a4-4cc5-aa89-1fa666ce9bf4",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "DashRight",
+                    "groups": "Gamepad",
+                    "action": "SlowDown",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
             ]
         }
     ],
-    "controlSchemes": []
+    "controlSchemes": [
+        {
+            "name": "Keyboard",
+            "bindingGroup": "Keyboard",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Gamepad",
+            "bindingGroup": "Gamepad",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Mobile",
+            "bindingGroup": "Mobile",
+            "devices": [
+                {
+                    "devicePath": "<Touchscreen>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
 }

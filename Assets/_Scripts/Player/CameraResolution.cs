@@ -5,11 +5,11 @@ using UnityEngine;
 public class CameraResolution : MonoBehaviour
 {
     Camera cam;
-    [SerializeField] int height = 240;
+    [SerializeField] int height = 224;
     int width;
     [HideInInspector] public RenderTexture tex;
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         width = (int)(((float)Screen.currentResolution.width / (float)Screen.currentResolution.height) * height);
         RenderTextureDescriptor descriptor = new RenderTextureDescriptor(width, height);

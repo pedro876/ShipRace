@@ -4,51 +4,46 @@ using UnityEngine;
 
 public class Tunnel : MonoBehaviour
 {
-    [SerializeField] Transform tunnelEnd;
-    [SerializeField] List<GameObject> obstaclePrefabs;
-    /*[SerializeField] */Transform obstaclePoint;
-    List<GameObject> obstacles;
-    Quaternion originalRotation;
-
+    public Transform tunnelEnd { get; private set; }
     public Rail rail { get; private set; }
+    public Obstacle obstacle { get; private set; }
+    [HideInInspector] public int sectionIndex = -1;
+    [SerializeField] bool isCurve;
+    Quaternion originalRotation;
+    Transform obstaclePoint;
+    public bool IsCurve() => isCurve;
 
-    //public float Length => length;
-
-    public Transform TunnelEnd => tunnelEnd;
-
-    private void Awake()
-    {
-        obstacles = new List<GameObject>();
-        rail = GetComponentInChildren<Rail>();
-        originalRotation = transform.rotation;
-        obstaclePoint = transform;
-        /*if (obstaclePoint == null)
-            obstaclePoint = transform;*/
-    }
-
-    public void Place(Vector3 position, Quaternion rotation, bool withObstacles = true)
+    public void Initialize(Vector3 position, Quaternion rotation, Obstacle obstacle)
     {
         transform.position = position;
         transform.rotation = rotation * originalRotation;
-        Randomize(withObstacles);
-    }
-
-    private void Randomize(bool withObstacles)
-    {
-        foreach(var obstacle in obstacles)
+        this.obstacle = obstacle;
+        if (obstacle != null)
         {
-            Destroy(obstacle);
-        }
-        obstacles.Clear();
-
-        if (withObstacles && obstaclePoint != null)
-        {
-            int rnd = Random.Range(0, obstaclePrefabs.Count);
-            var obstacle = Instantiate(obstaclePrefabs[rnd], obstaclePoint, true);
+            obstacle.transform.SetParent(obstaclePoint);
             obstacle.transform.localPosition = Vector3.zero;
             int rndRot = Random.Range(0, 4);
             obstacle.transform.localRotation = Quaternion.Euler(0f, 0f, 90f * rndRot);
-            obstacles.Add(obstacle);
         }
+    }
+
+    private void Awake()
+    {
+        rail = GetComponentInChildren<Rail>();
+        obstaclePoint = transform;
+        tunnelEnd = FindChildWithTag("TunnelEnd");
+        originalRotation = transform.rotation;
+    }
+
+    private Transform FindChildWithTag(string tag)
+    {
+        Transform foundChild = null;
+        for (int i = 0; i < transform.childCount && foundChild == null; i++)
+        {
+            var child = transform.GetChild(i);
+            if (child.tag == tag)
+                foundChild = child;
+        }
+        return foundChild;
     }
 }

@@ -61,7 +61,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 40
+  field of view: 60
   orthographic: 0
   orthographic size: 11.11
   m_Depth: -1
@@ -132,9 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efe0661543d2a2f44a96cf3f3cadea9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRailPoint: {fileID: 0}
   rotLerp: 20
-  posLerp: 40
   maxDistanceFromRail: 16.5
 --- !u!114 &5100646204314636796
 MonoBehaviour:

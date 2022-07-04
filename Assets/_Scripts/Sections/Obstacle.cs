@@ -7,6 +7,8 @@ public class Obstacle : MonoBehaviour
     [SerializeField] float colliderScale = 3f;
     [SerializeField] PhysicMaterial physicMat;
 
+    public int idx;
+
     private void Awake()
     {
         var obj = new GameObject("obstacleCollider", typeof(MeshCollider));
