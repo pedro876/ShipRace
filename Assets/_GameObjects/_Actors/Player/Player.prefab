@@ -113,9 +113,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0bdf07fcf7f3b14a92e3f3c13a8a398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gyroExponent: 0.5
+  gyroExponent: 0.75
   maxVerticalGyroAngle: 15
   maxHorizontalGyroAngle: 15
+  sideMotionLerpFactor: 10
 --- !u!114 &878693589693706260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,12 +350,12 @@ PrefabInstance:
     - target: {fileID: 5100646204314636795, guid: 411eee891267d354380b4223db79d855,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.8386598
+      value: 1.96
       objectReference: {fileID: 0}
     - target: {fileID: 5100646204314636795, guid: 411eee891267d354380b4223db79d855,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.8
+      value: -11.01
       objectReference: {fileID: 0}
     - target: {fileID: 5100646204314636795, guid: 411eee891267d354380b4223db79d855,
         type: 3}

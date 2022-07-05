@@ -3,7 +3,17 @@ guid: a1ea671f66dd3f742b46cd945e17ba08
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PropulsorMat
+    second: {fileID: 2100000, guid: 876d6f3623ed3bd4aa088f02ef34504f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ShipMat
+    second: {fileID: 2100000, guid: decee17c468356e4fb911ee6310029e6, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

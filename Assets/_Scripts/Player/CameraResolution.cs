@@ -9,7 +9,7 @@ public class CameraResolution : MonoBehaviour
     int width;
     [HideInInspector] public RenderTexture tex;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         width = (int)(((float)Screen.currentResolution.width / (float)Screen.currentResolution.height) * height);
         RenderTextureDescriptor descriptor = new RenderTextureDescriptor(width, height);

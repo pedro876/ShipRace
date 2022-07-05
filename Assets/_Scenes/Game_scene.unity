@@ -1376,20 +1376,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 878693589582238096, guid: 10c1faf08c411bb47af5e17688576d99,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 878693589693706258, guid: 10c1faf08c411bb47af5e17688576d99,
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 878693589693706258, guid: 10c1faf08c411bb47af5e17688576d99,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 878693589693706261, guid: 10c1faf08c411bb47af5e17688576d99,
         type: 3}
@@ -1444,56 +1434,6 @@ PrefabInstance:
     - target: {fileID: 878693589693706261, guid: 10c1faf08c411bb47af5e17688576d99,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 878693589693706262, guid: 10c1faf08c411bb47af5e17688576d99,
-        type: 3}
-      propertyPath: gyroExponent
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 878693589693706262, guid: 10c1faf08c411bb47af5e17688576d99,
-        type: 3}
-      propertyPath: sideMotionLerpFactor
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 878693590010120284, guid: 10c1faf08c411bb47af5e17688576d99,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 878693590920860154, guid: 10c1faf08c411bb47af5e17688576d99,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 878693590920860155, guid: 10c1faf08c411bb47af5e17688576d99,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 878693590920860156, guid: 10c1faf08c411bb47af5e17688576d99,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 878693590920860157, guid: 10c1faf08c411bb47af5e17688576d99,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 878693590920860158, guid: 10c1faf08c411bb47af5e17688576d99,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 878693590920860159, guid: 10c1faf08c411bb47af5e17688576d99,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 878693591505335236, guid: 10c1faf08c411bb47af5e17688576d99,
-        type: 3}
-      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

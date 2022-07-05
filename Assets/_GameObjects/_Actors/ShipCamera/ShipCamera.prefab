@@ -146,5 +146,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6618bb49e1102034888cedd382c51a5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  height: 224
+  height: 192
   tex: {fileID: 0}
