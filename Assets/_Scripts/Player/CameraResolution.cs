@@ -11,11 +11,12 @@ public class CameraResolution : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        width = (int)(((float)Screen.currentResolution.width / (float)Screen.currentResolution.height) * height);
+        width = (int)(((float)Screen.width / (float)Screen.height) * height);
         RenderTextureDescriptor descriptor = new RenderTextureDescriptor(width, height);
         tex = new RenderTexture(descriptor);
         tex.filterMode = FilterMode.Point;
         cam = GetComponent<Camera>();
         cam.targetTexture = tex;
+        Debug.Log($"Final resolution: {width}x{height}");
     }
 }

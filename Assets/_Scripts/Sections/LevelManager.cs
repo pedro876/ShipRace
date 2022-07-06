@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.Assertions;
 
 public class LevelManager : MonoBehaviour
 {
@@ -30,9 +31,41 @@ public class LevelManager : MonoBehaviour
 
     public Tunnel currentSection => sections.Peek();
 
+    public void SetPlayer(Transform newPlayer)
+    {
+        Assert.IsNotNull(newPlayer, "Player assigned to level is null");
+        player = newPlayer;
+    }
+
+    public void ResetLevel()
+    {
+        if (sections != null)
+        {
+            while (sections.Count > 0)
+                RemoveSection(sections.Dequeue());
+        }
+        else
+            sections = new Queue<Tunnel>();
+
+        if (sectionsToRemove != null)
+        {
+            while (sectionsToRemove.Count > 0)
+                RemoveSection(sectionsToRemove.Dequeue());
+        }
+        else
+            sectionsToRemove = new Queue<Tunnel>();
+
+        for (int i = 0; i < transform.childCount; i++)
+            Destroy(transform.GetChild(i).gameObject);
+        for (int i = 0; i < numOfSections; i++)
+        {
+            AddSection();
+        }
+    }
+
     private void Awake()
     {
-        player = FindObjectOfType<ShipController>().transform;
+        //player = FindObjectOfType<ShipController>().transform;
         rectTunnelPrefabs = allTunnelPrefabs.FindAll(tunnel => !tunnel.IsCurve()).ToArray();
         tunnelCurvePrefabs = allTunnelPrefabs.FindAll(tunnel => tunnel.IsCurve()).ToArray();
         allTunnelPrefabs = null;
@@ -47,14 +80,7 @@ public class LevelManager : MonoBehaviour
     }
     void Start()
     {
-        sections = new Queue<Tunnel>();
-        sectionsToRemove = new Queue<Tunnel>();
-        for (int i = 0; i < transform.childCount; i++)
-            Destroy(transform.GetChild(i).gameObject);
-        for(int i = 0; i < numOfSections; i++)
-        {
-            AddSection();
-        }
+        ResetLevel();
     }
 
     private void AddSection()
@@ -101,6 +127,7 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (player == null) return;
         //Debug.Log(currentSection.gameObject.name);
         if(currentSection.tunnelEnd.InverseTransformPoint(player.position).z > 0f)
         {
@@ -117,29 +144,28 @@ public class LevelManager : MonoBehaviour
         {
             var sectionToRemove = sectionsToRemove.Dequeue();
             //sectionToRemove.obstacle
-            if(sectionToRemove.obstacle != null)
-                obstaclePool.Release(sectionToRemove.obstacle);
-
-            if (sectionToRemove.IsCurve())
-                curvePool.Release(sectionToRemove);
-            else if(sectionToRemove.sectionIndex >= 0)
-            {
-                tunnelPools[sectionToRemove.sectionIndex].Release(sectionToRemove);
-                //Destroy(sectionToRemove.gameObject);
-            }
-            else
-            {
-                Destroy(sectionToRemove.gameObject);
-            }
+            RemoveSection(sectionToRemove);
             
             AddSection();
-            /*sections.Enqueue(sectionToReplace);
-            sectionToReplace.Place(lastSection.TunnelEnd.position, lastSection.TunnelEnd.rotation);
-            lastSection = sectionToReplace;*/
         }
+    }
 
-        //lastSection = first;
-        //sections.Enqueue(first);
+    private void RemoveSection(Tunnel sectionToRemove)
+    {
+        if (sectionToRemove.obstacle != null)
+            obstaclePool.Release(sectionToRemove.obstacle);
+
+        if (sectionToRemove.IsCurve())
+            curvePool.Release(sectionToRemove);
+        else if (sectionToRemove.sectionIndex >= 0)
+        {
+            tunnelPools[sectionToRemove.sectionIndex].Release(sectionToRemove);
+            //Destroy(sectionToRemove.gameObject);
+        }
+        else
+        {
+            Destroy(sectionToRemove.gameObject);
+        }
     }
 
     /*private Tunnel RandomTunnel(Tunnel[] sectionList)

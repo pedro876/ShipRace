@@ -11,7 +11,7 @@ public class GetGameRenderTex : MonoBehaviour
     void Start()
     {
         img = GetComponent<RawImage>();
-        RenderTexture tex = Camera.main.GetComponent<CameraResolution>().tex;
+        RenderTexture tex = Camera.main.targetTexture;
         img.texture = tex;
         img.color = Color.white;
         img.enabled = true;

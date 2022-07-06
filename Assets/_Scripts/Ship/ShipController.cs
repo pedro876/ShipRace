@@ -22,9 +22,19 @@ public class ShipController : MonoBehaviour, IRailTraversor
     private float tiltAngle = 0f;
     private float maxSpeed;
     private float minSpeed;
+    private bool blocked = true;
+    private Vector3 originalPos;
+    private Quaternion originalRot;
 
     public Vector3 GetRailPosition() => railPosition;
     public Quaternion GetRailRotation() => railRotation;
+
+    public void ResetAndBlock()
+    {
+        Block();
+        transform.position = originalPos;
+        transform.rotation = originalRot;
+    }
 
     public void SetInput(IShipInput newInput)
     {
@@ -53,10 +63,23 @@ public class ShipController : MonoBehaviour, IRailTraversor
         minSpeed = stats.zSpeed * stats.slowDownMultiplier;
     }
 
+    public void Block()
+    {
+        blocked = true;
+        rb.isKinematic = true;
+    }
+    public void Release()
+    {
+        blocked = false;
+        rb.isKinematic = false;
+    }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         level = FindObjectOfType<LevelManager>();
+        originalPos = transform.position;
+        originalRot = transform.rotation;
     }
 
     private void DashRight()
@@ -79,14 +102,14 @@ public class ShipController : MonoBehaviour, IRailTraversor
 
     private void Update()
     {
-        leftTrail.emitting = !input.IsSlowingDown();
-        rightTrail.emitting = !input.IsSlowingDown();
-        propulsorTrail.emitting = input.IsSpeedingUp() && !input.IsSlowingDown();
+        leftTrail.emitting = !blocked && !input.IsSlowingDown();
+        rightTrail.emitting = !blocked && !input.IsSlowingDown();
+        propulsorTrail.emitting = !blocked && input.IsSpeedingUp() && !input.IsSlowingDown();
     }
 
     private void FixedUpdate()
     {
-        if (this.input == null) return;
+        if (blocked || this.input == null) return;
 
         Quaternion targetRot = MoveShip();
         targetRot = CheckDash(targetRot);
@@ -187,6 +210,4 @@ public class ShipController : MonoBehaviour, IRailTraversor
         tiltAngle = Mathf.Lerp(tiltAngle, angle, config.tiltAngleLerp * Time.fixedDeltaTime);
         return targetRot * Quaternion.Euler(0f, 0f, tiltAngle);
     }
-
-    
 }

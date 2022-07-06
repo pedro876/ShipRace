@@ -3,7 +3,17 @@ guid: 6e1bf066d9019c04e9b4f0172afd9a6f
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass_mat
+    second: {fileID: 2100000, guid: defd40f309cbf9e47b5a3c63f98f7622, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tunnel_mat
+    second: {fileID: 2100000, guid: d64a14ddfb9ba994ca9fe160ea64ebf6, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
