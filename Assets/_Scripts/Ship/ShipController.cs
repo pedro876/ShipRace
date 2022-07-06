@@ -6,6 +6,9 @@ using UnityEngine.Assertions;
 
 public class ShipController : MonoBehaviour, IRailTraversor
 {
+    [SerializeField] TrailRenderer leftTrail;
+    [SerializeField] TrailRenderer rightTrail;
+    [SerializeField] TrailRenderer propulsorTrail;
     private IShipInput input;
     private ShipStats stats;
     private ShipConfig config;
@@ -17,6 +20,8 @@ public class ShipController : MonoBehaviour, IRailTraversor
     private bool dashingLeft;
     private float time = 0f;
     private float tiltAngle = 0f;
+    private float maxSpeed;
+    private float minSpeed;
 
     public Vector3 GetRailPosition() => railPosition;
     public Quaternion GetRailRotation() => railRotation;
@@ -44,6 +49,8 @@ public class ShipController : MonoBehaviour, IRailTraversor
     {
         Assert.IsNotNull(stats, "Stats assigned is null");
         this.stats = stats;
+        maxSpeed = stats.zSpeed * stats.speedUpMultiplier;
+        minSpeed = stats.zSpeed * stats.slowDownMultiplier;
     }
 
     private void Awake()
@@ -70,6 +77,13 @@ public class ShipController : MonoBehaviour, IRailTraversor
         }
     }
 
+    private void Update()
+    {
+        leftTrail.emitting = !input.IsSlowingDown();
+        rightTrail.emitting = !input.IsSlowingDown();
+        propulsorTrail.emitting = input.IsSpeedingUp() && !input.IsSlowingDown();
+    }
+
     private void FixedUpdate()
     {
         if (this.input == null) return;
@@ -94,7 +108,50 @@ public class ShipController : MonoBehaviour, IRailTraversor
 
         Quaternion targetRot = railRotation * upRot * horizontalRot * verticalRot;
 
-        Vector3 speed = new Vector3(sideMotion.x * stats.xSpeed, sideMotion.y * stats.ySpeed, stats.zSpeed);
+
+        float currentSpeed = (Quaternion.Inverse(projRot) * rb.velocity).z;
+        bool speedingUp = input.IsSpeedingUp() && !input.IsSlowingDown();
+        bool slowingDown = input.IsSlowingDown();
+
+        float newZSpeed = currentSpeed;
+        if (speedingUp)
+        {
+            float acc = stats.acceleration * stats.speedUpMultiplier;
+            newZSpeed += acc * Time.fixedDeltaTime;
+            if (newZSpeed > maxSpeed)
+                newZSpeed = maxSpeed;
+        }
+        else if (slowingDown)
+        {
+            float acc = -stats.acceleration;
+            newZSpeed += acc * Time.fixedDeltaTime;
+            if (newZSpeed < minSpeed)
+                newZSpeed = minSpeed;
+        }
+        else
+        {
+            if (currentSpeed == stats.zSpeed)
+                newZSpeed = stats.zSpeed;
+            else
+            {
+                float acc = stats.acceleration;
+                if (currentSpeed < stats.zSpeed)
+                {
+                    newZSpeed += acc * Time.fixedDeltaTime;
+                    if (newZSpeed > stats.zSpeed)
+                        newZSpeed = stats.zSpeed;
+                }
+                else if(currentSpeed > stats.zSpeed)
+                {
+                    newZSpeed -= acc * Time.fixedDeltaTime;
+                    if(newZSpeed < stats.zSpeed)
+                    {
+                        newZSpeed = stats.zSpeed;
+                    }
+                }
+            }
+        }
+        Vector3 speed = new Vector3(sideMotion.x * stats.xSpeed, sideMotion.y * stats.ySpeed, newZSpeed);
         rb.velocity = projRot * speed;
 
         return targetRot;

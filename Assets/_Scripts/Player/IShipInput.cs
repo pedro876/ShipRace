@@ -11,4 +11,5 @@ public interface IShipInput
     public event Action onDashLeft;
     public float GetTilt(); // turning -1 to 1
     public bool IsSlowingDown();
+    public bool IsSpeedingUp();
 }

@@ -139,7 +139,7 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
-  m_Emitting: 1
+  m_Emitting: 0
 --- !u!1 &3669232807348065689
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,7 +279,7 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
-  m_Emitting: 1
+  m_Emitting: 0
 --- !u!1 &4479623804474288817
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,6 +510,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50e243ca2adf2b6469d3e51d54120aa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftTrail: {fileID: 3669232807165622219}
+  rightTrail: {fileID: 3669232807348065695}
+  propulsorTrail: {fileID: 4530379724171643861}
 --- !u!1 &6371469811013224386
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,7 +604,7 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 1
       - serializedVersion: 3
-        time: 0.07395446
+        time: 0.10862318
         value: 0.57636106
         inSlope: -0.000016664233
         outSlope: -0.000016664233
@@ -610,7 +613,7 @@ TrailRenderer:
         inWeight: 1
         outWeight: 1
       - serializedVersion: 3
-        time: 0.09321795
+        time: 0.18566406
         value: 0
         inSlope: -0.68178916
         outSlope: -0.68178916
@@ -658,4 +661,4 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
-  m_Emitting: 1
+  m_Emitting: 0

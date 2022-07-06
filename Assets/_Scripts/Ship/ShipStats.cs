@@ -19,4 +19,7 @@ public class ShipStats : ScriptableObject
     public float dashSpeed = 120f;
     public float dashTime = 0.75f;
     public float tiltAngle = 70f;
+    public float acceleration = 10f;
+    public float speedUpMultiplier = 1.5f;
+    public float slowDownMultiplier = 0.5f;
 }

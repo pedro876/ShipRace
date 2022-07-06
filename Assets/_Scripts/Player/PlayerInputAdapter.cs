@@ -16,6 +16,7 @@ public class PlayerInputAdapter : MonoBehaviour, IShipInput
     private Vector2 sideMotion = Vector2.zero;
     private float tilt = 0f;
     private bool slowingDown = false;
+    private bool speedingUp = false;
     private float lastTouchPos = 0f;
     private PlayerInput input;
 
@@ -28,6 +29,7 @@ public class PlayerInputAdapter : MonoBehaviour, IShipInput
         InputAction dashLeft = input.actions["DashLeft"];
         InputAction tilt = input.actions["Tilt"];
         InputAction slowDown = input.actions["SlowDown"];
+        InputAction speedUp = input.actions["SpeedUp"];
         InputAction dashTouch = input.actions["DashTouch"];
         sideMotion.performed += OnSideMotion;
         tilt.performed += OnTilt;
@@ -36,6 +38,8 @@ public class PlayerInputAdapter : MonoBehaviour, IShipInput
         dashLeft.performed += OnDashLeft;
         slowDown.started += OnSlowDown;
         slowDown.canceled += OnSlowDown;
+        speedUp.started += OnSpeedUp;
+        speedUp.canceled += OnSpeedUp;
         dashTouch.performed += OnDashTouch;
         #if (UNITY_ANDROID || UNITY_EDITOR)
             EnhancedTouchSupport.Enable();
@@ -48,6 +52,8 @@ public class PlayerInputAdapter : MonoBehaviour, IShipInput
         ProcessTouches();
         ProcessGyro();
     }
+
+#region TouchAndGyro
 
     private void ProcessTouches()
     {
@@ -106,6 +112,8 @@ public class PlayerInputAdapter : MonoBehaviour, IShipInput
         rawSideMotion = new Vector2(horizontalAxis, verticalAxis);
     }
 
+    #endregion
+
 #region CallbacksForPlayerInput
     private void OnSideMotion(InputAction.CallbackContext ctx)
     {
@@ -143,9 +151,14 @@ public class PlayerInputAdapter : MonoBehaviour, IShipInput
     {
         slowingDown = ctx.ReadValueAsButton();
     }
-#endregion
 
-#region API
+    private void OnSpeedUp(InputAction.CallbackContext ctx)
+    {
+        speedingUp = ctx.ReadValueAsButton();
+    }
+    #endregion
+
+    #region API
     public event Action onDashRight;
     public event Action onDashLeft;
     public Vector2 GetRawSideMotion()
@@ -166,6 +179,11 @@ public class PlayerInputAdapter : MonoBehaviour, IShipInput
     public bool IsSlowingDown()
     {
         return slowingDown;
+    }
+
+    public bool IsSpeedingUp()
+    {
+        return speedingUp;
     }
 
 #endregion

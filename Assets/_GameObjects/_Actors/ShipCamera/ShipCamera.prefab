@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotLerp: 20
+  posLerp: 40
   maxDistanceFromRail: 16.5
 --- !u!114 &5100646204314636796
 MonoBehaviour:

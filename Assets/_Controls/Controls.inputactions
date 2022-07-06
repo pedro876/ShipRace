@@ -51,6 +51,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "SpeedUp",
+                    "type": "Button",
+                    "id": "ff1dc0b3-dedb-4036-b008-88bef6ec5953",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "DashTouch",
                     "type": "Button",
                     "id": "5807d3e8-3627-4ff0-b7dd-039b9828e747",
@@ -238,39 +247,6 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "XB Axis",
-                    "id": "84c12304-706c-40a2-b76a-054216ae212e",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Tilt",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "c3997e53-7c7f-4c1d-b459-9560e9ca2fc7",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Tilt",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "004bcad9-5958-41d5-915e-3429e040d4ce",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Tilt",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "Trigger Axis",
                     "id": "7184fe1f-1082-48c9-8df0-f8203c565345",
                     "path": "1DAxis",
@@ -317,11 +293,55 @@
                 {
                     "name": "",
                     "id": "2ecbb973-9ad4-4d32-835c-ee73ade56cbb",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "SlowDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cc9a2dfd-7918-453d-a428-936ed5ddd856",
+                    "path": "<Gamepad>/rightStick/down",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "SlowDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2cbf3bcc-7eb6-4a59-95f5-cb2b63da9098",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "SpeedUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d5e21f87-bac3-4cbb-932d-0fc3217efdb0",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "SpeedUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bb5e097b-d8dd-4495-b457-a84c0b95d9d2",
+                    "path": "<Gamepad>/rightStick/up",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "SpeedUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

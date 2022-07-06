@@ -10,6 +10,7 @@ public class CameraController : MonoBehaviour
     Vector3 distanceToTarget;
     IGyroSystem gyro;
     [SerializeField] float rotLerp = 10f;
+    [SerializeField] float posLerp = 40f;
     [SerializeField] float maxDistanceFromRail = 16f;
 
     public void SetTarget(Transform ship, Transform railPoint)
@@ -42,7 +43,8 @@ public class CameraController : MonoBehaviour
         }
         targetPosOnRail.z = originalZ;
         targetPos = railPoint.TransformPoint(targetPosOnRail);
-        transform.position = targetPos;
+        transform.position = Vector3.Lerp(transform.position, targetPos, posLerp * Time.fixedDeltaTime);
+        //transform.position = targetPos;
     }
 
     private void CalculateRotation()
