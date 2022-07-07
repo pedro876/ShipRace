@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 836783e53eda56e4e8b2649c2604db8f, type: 3}
+  m_Name: DefaultTextStylePreset
+  m_EditorClassIdentifier: 
+  fontAsset: {fileID: 11400000, guid: af43c7ab5048ab741a37c395d120ad95, type: 2}
+  vertexColor: {r: 1, g: 1, b: 1, a: 1}
+  colorGradient: 1
+  colorGradientPreset: {fileID: 11400000, guid: 28bd868029b43034dbd3121b0c3b08f4,
+    type: 2}
+  fontSize: 10

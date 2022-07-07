@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54d21f6ece3b46479f0c328f8c6007e0, type: 3}
-  m_Name: MyColorGradient
+  m_Name: WarningColorGradient
   m_EditorClassIdentifier: 
   colorMode: 2
-  topLeft: {r: 0.24705884, g: 0.5529412, b: 0.9960785, a: 1}
-  topRight: {r: 0.24705884, g: 0.5529412, b: 0.9960785, a: 1}
-  bottomLeft: {r: 0.24705882, g: 0.826399, b: 0.99607843, a: 1}
-  bottomRight: {r: 0.24705882, g: 0.826399, b: 0.99607843, a: 1}
+  topLeft: {r: 1, g: 0.5485975, b: 0, a: 1}
+  topRight: {r: 1, g: 0.5485975, b: 0, a: 1}
+  bottomLeft: {r: 1, g: 0.95475364, b: 0, a: 1}
+  bottomRight: {r: 1, g: 0.95475364, b: 0, a: 1}

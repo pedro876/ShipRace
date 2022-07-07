@@ -6,6 +6,7 @@ using TMPro;
 public class CountDown : MonoBehaviour
 {
     TextMeshProUGUI text;
+    [SerializeField] float delay = 1f;
     [SerializeField] float textDuration = 0.5f;
 
     private void Start()
@@ -25,6 +26,8 @@ public class CountDown : MonoBehaviour
 
     IEnumerator CountDownCoroutine()
     {
+        text.text = "";
+        yield return new WaitForSeconds(delay);
         text.text = "3";
         yield return new WaitForSeconds(textDuration);
         text.text = "2";

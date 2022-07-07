@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class InitCamera : MonoBehaviour
+public class ExitBtn : MonoBehaviour
 {
+    Button btn;
+
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.instance.onStateChanged += state =>
-        {
-            gameObject.SetActive(state == GameManager.GameState.Init);
-        };
+        btn = GetComponent<Button>();
+
     }
 
     // Update is called once per frame

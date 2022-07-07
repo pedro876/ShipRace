@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     static GameManager()
     {
+        //INSTALL NULL SERVICES
         serviceLocator.RegisterService<IGyroSystem>(new NullGyroSystem());
         Debug.Log("GameManager initialized");
     }
@@ -26,10 +27,12 @@ public class GameManager : MonoBehaviour
         Init,
         Menu,
         CountDown,
-        Game
+        Game,
+        Exit,
+        Options
     }
 
-    private GameState gameState;
+    public GameState currentState { get; private set; }
     private Player player;
     private LevelManager level;
 
@@ -41,9 +44,14 @@ public class GameManager : MonoBehaviour
 
     public void SetState(GameState newState)
     {
-        if (newState == gameState) return;
-        gameState = newState;
+        if (newState == currentState) return;
+        currentState = newState;
         onStateChanged?.Invoke(newState);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 
     private void Awake()
