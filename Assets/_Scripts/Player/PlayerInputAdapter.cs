@@ -7,7 +7,7 @@ using UnityEngine.InputSystem.EnhancedTouch;
 
 public class PlayerInputAdapter : MonoBehaviour, IShipInput
 {
-    [SerializeField] private float gyroExponent = 0.5f;
+    [SerializeField] private float gyroExponent = 0.75f;
     [SerializeField] private float maxVerticalGyroAngle = 15f;
     [SerializeField] private float maxHorizontalGyroAngle = 15f;
     [SerializeField]private float sideMotionLerpFactor = 10f;
@@ -24,6 +24,7 @@ public class PlayerInputAdapter : MonoBehaviour, IShipInput
     {
         
         input = GetComponent<PlayerInput>();
+        input.actions.Enable();
         InputAction sideMotion = input.actions["SideMotion"];
         InputAction dashRight = input.actions["DashRight"];
         InputAction dashLeft = input.actions["DashLeft"];

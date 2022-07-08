@@ -38,6 +38,11 @@ public class Player : MonoBehaviour
         ship.SetStats(newStats);
     }
 
+    public void SetInput(IShipInput playerInput)
+    {
+        this.playerInput = playerInput;
+    }
+
     public void BlockInput()
     {
         ship.SetInput(nullInput);
@@ -72,7 +77,7 @@ public class Player : MonoBehaviour
         shipRailPoint.SetTraversor(ship);
         cam.SetTarget(ship.transform, shipRailPoint.transform);
 
-        playerInput = GetComponent<PlayerInputAdapter>();
+        //playerInput = GetComponent<PlayerInputAdapter>();
         nullInput = new NullInput();
         ship.SetInput(nullInput);
         ship.SetConfig(shipConfig);

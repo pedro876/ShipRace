@@ -29,11 +29,13 @@ public class GameManager : MonoBehaviour
         CountDown,
         Game,
         Exit,
-        Options
+        Settings
     }
 
     public GameState currentState { get; private set; }
     private Player player;
+    private PlayerInputAdapter playerInput;
+    private UIInputAdapter uiInput;
     private LevelManager level;
 
     public event Action<GameState> onStateChanged;
@@ -58,7 +60,11 @@ public class GameManager : MonoBehaviour
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         Application.targetFrameRate = 60;
+        playerInput = FindObjectOfType<PlayerInputAdapter>();
+        uiInput = FindObjectOfType<UIInputAdapter>();
+        serviceLocator.RegisterService<UIInputAdapter>(uiInput);
         player = FindObjectOfType<Player>();
+        player.SetInput(playerInput);
         level = FindObjectOfType<LevelManager>();
         instance = this;
         SetState(GameState.Init);

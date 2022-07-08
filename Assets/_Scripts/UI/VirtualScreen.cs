@@ -18,7 +18,7 @@ public class VirtualScreen : GraphicRaycaster
         eventData.position = ToScreenCamera(eventData.position);
         //eventData.position /= targetRes;
         ray = screenCamera.ScreenPointToRay(eventData.position); // Mouse
-        Debug.Log(eventData.position);
+        //Debug.Log(eventData.position);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
         {

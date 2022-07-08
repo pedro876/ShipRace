@@ -14,6 +14,7 @@ public class MenuButton : MonoBehaviour
     private TextMeshProUGUI text;
     private float originalFontSize;
     private Color originalFontColor;
+    Button btn;
 
     //private const float halfScaleMult = 0.75f;
     private SmoothFloat transitionVal;
@@ -21,6 +22,7 @@ public class MenuButton : MonoBehaviour
 
     private void Awake()
     {
+        btn = GetComponent<Button>();
         text = GetComponentInChildren<TextMeshProUGUI>();
         button = GetComponent<Button>();
         originalFontSize = text.fontSize;
@@ -62,6 +64,11 @@ public class MenuButton : MonoBehaviour
         transitionVal.SetMaxTime(time);
         transitionVal.SetValue(0f);
         button.interactable = false;
+    }
+
+    public void Press()
+    {
+        btn.onClick?.Invoke();
     }
 
     private void Update()

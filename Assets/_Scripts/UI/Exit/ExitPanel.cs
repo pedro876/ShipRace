@@ -11,6 +11,7 @@ public class ExitPanel : LeanTransitionBase
     [SerializeField] float animTime = 1f;
     Vector2 showPos;
     Vector2 hidePos;
+    bool confirmSelected = false;
 
     protected override void Init()
     {
@@ -21,22 +22,47 @@ public class ExitPanel : LeanTransitionBase
             GameManager.instance.ExitGame();
         });
 
-        /*cancelBtn.onClick.AddListener(() => GameManager.instance.SetState(GameManager.GameState.Menu));
-
-        GameManager.instance.onStateChanged += state =>
-        {
-            if (state == GameManager.GameState.Exit)
-            {
-                Show();
-            }
-            else
-            {
-                Hide();
-            }
-        };*/
-
         rectTransform.anchoredPosition = hidePos;
         gameObject.SetActive(false);
+
+        
+    }
+
+    private void OnEnable()
+    {
+        var input = GameManager.serviceLocator.GetService<UIInputAdapter>();
+        input.onRight += SelectConfirm;
+        input.onLeft += SelectCancel;
+        input.onSelect += Press;
+        SelectCancel();
+    }
+
+    private void OnDisable()
+    {
+        var input = GameManager.serviceLocator.GetService<UIInputAdapter>();
+        input.onRight -= SelectConfirm;
+        input.onLeft -= SelectCancel;
+        input.onSelect -= Press;
+    }
+
+    void SelectConfirm()
+    {
+        confirmBtn.Select();
+        confirmSelected = true;
+    }
+
+    void SelectCancel()
+    {
+        cancelBtn.Select();
+        confirmSelected = false;
+    }
+
+    void Press()
+    {
+        if (confirmSelected)
+            confirmBtn.onClick?.Invoke();
+        else
+            cancelBtn.onClick?.Invoke();
     }
 
     protected override LTDescr HideAnimation()

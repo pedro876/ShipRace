@@ -54,6 +54,22 @@ public class MenuPanel : MonoBehaviour
         down.onClick.AddListener(() => moveDownOrders++);
     }
 
+    private void OnEnable()
+    {
+        var input = GameManager.serviceLocator.GetService<UIInputAdapter>();
+        input.onDown += AddMoveDownOrder;
+        input.onUp += AddMoveUpOrder;
+        input.onSelect += PressCurrentButton;
+    }
+
+    private void OnDisable()
+    {
+        var input = GameManager.serviceLocator.GetService<UIInputAdapter>();
+        input.onDown -= AddMoveDownOrder;
+        input.onUp -= AddMoveUpOrder;
+        input.onSelect -= PressCurrentButton;
+    }
+
     private void Update()
     {
         if (!transitioning)
@@ -90,6 +106,16 @@ public class MenuPanel : MonoBehaviour
                 buttons[i].Hide(time);
             }
         }
+    }
+
+    private void AddMoveUpOrder()
+    {
+        moveUpOrders++;
+    }
+
+    private void AddMoveDownOrder()
+    {
+        moveDownOrders++;
     }
 
     private void MoveUp()
@@ -130,6 +156,11 @@ public class MenuPanel : MonoBehaviour
         {
             buttons[i].Move(amount, moveTime);
         }
+    }
+
+    private void PressCurrentButton()
+    {
+        buttons[buttonIdx].Press();
     }
 
     IEnumerator DuringTransition()
