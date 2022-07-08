@@ -15,7 +15,7 @@ public class MenuButton : MonoBehaviour
     private float originalFontSize;
     private Color originalFontColor;
 
-    private const float halfScaleMult = 0.75f;
+    //private const float halfScaleMult = 0.75f;
     private SmoothFloat transitionVal;
     Button button;
 
@@ -50,7 +50,7 @@ public class MenuButton : MonoBehaviour
         button.interactable = true;
     }
 
-    public void HalfHide(float time/*, bool instantly*/)
+    public void HalfHide(float time, float halfScaleMult/*, bool instantly*/)
     {
         transitionVal.SetMaxTime(time);
         transitionVal.SetValue(halfScaleMult);

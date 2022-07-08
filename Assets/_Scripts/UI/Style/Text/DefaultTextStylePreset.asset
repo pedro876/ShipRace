@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 836783e53eda56e4e8b2649c2604db8f, type: 3}
   m_Name: DefaultTextStylePreset
   m_EditorClassIdentifier: 
-  fontAsset: {fileID: 11400000, guid: af43c7ab5048ab741a37c395d120ad95, type: 2}
+  fontAsset: {fileID: 11400000, guid: 58e05cb43518ddf4695cd6b50d70165b, type: 2}
   vertexColor: {r: 1, g: 1, b: 1, a: 1}
   colorGradient: 1
   colorGradientPreset: {fileID: 11400000, guid: 28bd868029b43034dbd3121b0c3b08f4,
     type: 2}
-  fontSize: 10
+  fontSize: 8

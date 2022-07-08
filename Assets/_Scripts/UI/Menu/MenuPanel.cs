@@ -11,6 +11,7 @@ public class MenuPanel : MonoBehaviour
     UpDownBtn downAnim;
     [SerializeField] float moveTime = 0.5f;
     [SerializeField] float buttonSeparation = 10f;
+    [SerializeField] float halfVisibleButtonScale = 0.5f;
     [SerializeField] MenuButton defaultButton;
     [SerializeField] List<MenuButton> buttons;
 
@@ -82,7 +83,7 @@ public class MenuPanel : MonoBehaviour
             }
             else if (diff == 1 || diff == -1)
             {
-                buttons[i].HalfHide(time);
+                buttons[i].HalfHide(time, halfVisibleButtonScale);
             }
             else
             {
