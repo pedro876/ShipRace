@@ -24,8 +24,6 @@ public class ExitPanel : LeanTransitionBase
 
         rectTransform.anchoredPosition = hidePos;
         gameObject.SetActive(false);
-
-        
     }
 
     private void OnEnable()

@@ -17,12 +17,14 @@ public class SideEaseBackAnim : LeanTransitionBase
     protected override LTDescr ShowAnimation()
     {
         rectTransform.anchoredPosition = hidePos;
+        LeanTween.cancel(rectTransform);
         return LeanTween.move(rectTransform, srcPos, transitionTime).setEaseOutBack();
         //return transform.LeanMove(srcPos, transitionTime).setEaseOutBack();
     }
 
     protected override LTDescr HideAnimation()
     {
+        LeanTween.cancel(rectTransform);
         return LeanTween.move(rectTransform, hidePos, transitionTime).setEaseInBack();
     }
 }

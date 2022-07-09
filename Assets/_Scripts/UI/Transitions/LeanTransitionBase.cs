@@ -16,10 +16,10 @@ public abstract class LeanTransitionBase : MonoBehaviour
     protected abstract LTDescr HideAnimation();
 
     [SerializeField] float delay = 0f;
-    [SerializeField] UnityEvent onShow;
-    [SerializeField] UnityEvent onShown;
-    [SerializeField] UnityEvent onHide;
-    [SerializeField] UnityEvent onHidden;
+    [SerializeField] protected UnityEvent onShow;
+    [SerializeField] protected UnityEvent onShown;
+    [SerializeField] protected UnityEvent onHide;
+    [SerializeField] protected UnityEvent onHidden;
 
 
     private void Awake()

@@ -6,14 +6,17 @@ using UnityEngine.UI;
 public class GetGameRenderTex : MonoBehaviour
 {
     RawImage img;
+    [SerializeField] CameraResolution cam;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         img = GetComponent<RawImage>();
-        RenderTexture tex = Camera.main.targetTexture;
-        img.texture = tex;
         img.color = Color.white;
         img.enabled = true;
+        cam.onTextureChanged += () =>
+        {
+            img.texture = cam.tex;
+        };
     }
 }

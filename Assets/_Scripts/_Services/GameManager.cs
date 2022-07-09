@@ -65,6 +65,8 @@ public class GameManager : MonoBehaviour
         {
             ResumeGame();
         }
+
+        Debug.Log($"new state: {newState}");
     }
 
     public bool IsMusicOn()

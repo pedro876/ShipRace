@@ -7,11 +7,15 @@ public class ChangeGameStateOnClick : MonoBehaviour
 {
     Button btn;
     [SerializeField] GameManager.GameState nextState;
+    [SerializeField] bool printWhenHappened;
 
-    // Start is called before the first frame update
     void Start()
     {
         btn = GetComponent<Button>();
-        btn.onClick.AddListener(() => GameManager.instance.SetState(nextState));
+        btn.onClick.AddListener(() => {
+            GameManager.instance.SetState(nextState);
+            if(printWhenHappened)
+                Debug.Log("wtf");
+            });
     }
 }

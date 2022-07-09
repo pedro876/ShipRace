@@ -15,6 +15,7 @@ public class UIInputAdapter : MonoBehaviour
     public event Action onLeft;
     public event Action onSelect;
     public event Action onAny;
+    public event Action onEscape;
 
     // Start is called before the first frame update
     void Start()
@@ -26,11 +27,13 @@ public class UIInputAdapter : MonoBehaviour
         InputAction leftAction = input.actions["Left"];
         InputAction selectAction = input.actions["Select"];
         InputAction anyAction = input.actions["Any"];
+        InputAction escapeAction = input.actions["Escape"];
         upAction.performed += ctx => onUp?.Invoke();
         downAction.performed += ctx => onDown?.Invoke();
         rightAction.performed += ctx => onRight?.Invoke();
         leftAction.performed += ctx => onLeft?.Invoke();
-        selectAction.performed += ctx => onSelect?.Invoke();
+        selectAction.started += ctx => onSelect?.Invoke();
         anyAction.performed += ctx => onAny?.Invoke();
+        escapeAction.performed += ctx => onEscape?.Invoke();
     }
 }
