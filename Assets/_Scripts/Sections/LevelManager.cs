@@ -57,9 +57,28 @@ public class LevelManager : MonoBehaviour
 
         for (int i = 0; i < transform.childCount; i++)
             Destroy(transform.GetChild(i).gameObject);
+        lastSection = null;
+        sectionIndex = 0;
+        sectionType = 0;
         for (int i = 0; i < numOfSections; i++)
         {
             AddSection();
+        }
+    }
+
+    public void Pause()
+    {
+        foreach(var section in sections)
+        {
+            section.Pause();
+        }
+    }
+
+    public void Resume()
+    {
+        foreach (var section in sections)
+        {
+            section.Resume();
         }
     }
 

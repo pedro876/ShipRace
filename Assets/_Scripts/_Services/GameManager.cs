@@ -29,7 +29,8 @@ public class GameManager : MonoBehaviour
         CountDown,
         Game,
         Exit,
-        Settings
+        Settings,
+        Pause
     }
 
     public GameState currentState { get; private set; }
@@ -37,23 +38,74 @@ public class GameManager : MonoBehaviour
     private PlayerInputAdapter playerInput;
     private UIInputAdapter uiInput;
     private LevelManager level;
+    private bool musicOn = true;
+    private bool sfxOn = true;
 
     public event Action<GameState> onStateChanged;
-    /*public void SetInitState() => SetState(GameState.Init);
-    public void SetMenuState() => SetState(GameState.Menu);
-    public void SetCountDownState() => SetState(GameState.CountDown);
-    public void SetGameState() => SetState(GameState.Game);*/
 
     public void SetState(GameState newState)
     {
+        bool reset = currentState == GameState.Pause && newState != GameState.Game;
+        bool resume = currentState == GameState.Pause && newState == GameState.Game;
         if (newState == currentState) return;
         currentState = newState;
         onStateChanged?.Invoke(newState);
+        if(reset)
+        {
+            Debug.Log("Reseting game");
+            level.ResetLevel();
+            player.ResetPlayer();
+        }
+
+        if (newState == GameState.Pause)
+        {
+            PauseGame();
+        }
+        else if (resume)
+        {
+            ResumeGame();
+        }
+    }
+
+    public bool IsMusicOn()
+    {
+        return musicOn;
+    }
+
+    public bool IsSfxOn()
+    {
+        return sfxOn;
+    }
+
+    public void SetMusic(bool musicOn)
+    {
+        Debug.Log("Music turned: " + musicOn);
+        this.musicOn = musicOn;
+    }
+
+    public void SetSFX(bool sfxOn)
+    {
+        Debug.Log("Sfx turned: " + sfxOn);
+        this.sfxOn = sfxOn;
     }
 
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    private void PauseGame()
+    {
+        player.BlockInput();
+        player.BlockMotion();
+        level.Pause();
+    }
+
+    private void ResumeGame()
+    {
+        player.ReleaseInput();
+        player.ReleaseMotion();
+        level.Resume();
     }
 
     private void Awake()
@@ -74,4 +126,6 @@ public class GameManager : MonoBehaviour
     {
         level.SetPlayer(player.GetShipTransform());
     }
+
+    
 }

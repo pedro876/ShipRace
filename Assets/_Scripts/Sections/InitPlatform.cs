@@ -10,21 +10,28 @@ public class InitPlatform : MonoBehaviour
     Vector3 originalPos;
     Vector3 targetPos;
 
-    // Start is called before the first frame update
     void Start()
     {
         originalPos = transform.localPosition;
         targetPos = originalPos + Vector3.up * downDisplacement;
-        GameManager.instance.onStateChanged += state =>
-        {
-            if(state == GameManager.GameState.CountDown || state == GameManager.GameState.Game)
-            {
-                transform.LeanMoveLocal(targetPos, time).setEaseInCubic().delay = delay;
-            }
-            else
-            {
-                transform.LeanMoveLocal(originalPos, time).setEaseInCubic();
-            }
-        };
+        GameManager.instance.onStateChanged += OnStateChanged;
     }
+
+    private void OnDestroy()
+    {
+        GameManager.instance.onStateChanged -= OnStateChanged;
+    }
+
+    void OnStateChanged(GameManager.GameState state)
+    {
+        if (state == GameManager.GameState.CountDown || state == GameManager.GameState.Game)
+        {
+            transform.LeanMoveLocal(targetPos, time).setEaseInCubic().delay = delay;
+        }
+        else
+        {
+            transform.LeanMoveLocal(originalPos, time).setEaseInCubic();
+        }
+    }
+
 }

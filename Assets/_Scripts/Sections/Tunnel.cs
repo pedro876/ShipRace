@@ -27,6 +27,18 @@ public class Tunnel : MonoBehaviour
         }
     }
 
+    public void Pause()
+    {
+        if (obstacle == null) return;
+        obstacle.Pause();
+    }
+
+    public void Resume()
+    {
+        if (obstacle == null) return;
+        obstacle.Resume();
+    }
+
     private void Awake()
     {
         rail = GetComponentInChildren<Rail>();

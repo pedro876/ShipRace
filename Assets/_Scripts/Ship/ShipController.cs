@@ -31,9 +31,14 @@ public class ShipController : MonoBehaviour, IRailTraversor
 
     public void ResetAndBlock()
     {
+        tiltAngle = 0f;
+        time = 0f;
+        dashingRight = false;
+        dashingLeft = false;
         Block();
-        transform.position = originalPos;
-        transform.rotation = originalRot;
+        rb.position = originalPos;
+        rb.rotation = originalRot;
+        CalculateProjection();
     }
 
     public void SetInput(IShipInput newInput)
@@ -109,19 +114,25 @@ public class ShipController : MonoBehaviour, IRailTraversor
 
     private void FixedUpdate()
     {
-        if (blocked || this.input == null) return;
+        Quaternion projRot = CalculateProjection();
 
-        Quaternion targetRot = MoveShip();
+        if (blocked || this.input == null) return;
+        Quaternion targetRot = MoveShip(projRot);
         targetRot = CheckDash(targetRot);
         targetRot = CheckTilt(targetRot);
         rb.MoveRotation(targetRot);
     }
 
-    private Quaternion MoveShip()
+    private Quaternion CalculateProjection()
     {
         level.currentSection.rail.Project(transform.position, out var projPos, out var projRot);
         railPosition = projPos;
         railRotation = Quaternion.Lerp(railRotation, projRot, config.projRotLerp * Time.fixedDeltaTime);
+        return projRot;
+    }
+
+    private Quaternion MoveShip(Quaternion projRot)
+    {
 
         Vector2 sideMotion = input.GetSideMotion();
 
