@@ -28,6 +28,23 @@ public abstract class LeanTransitionBase : MonoBehaviour
         srcPos = rectTransform.anchoredPosition;
         srcRot = rectTransform.rotation;
         srcLocalScale = transform.localScale;
+        onShow.AddListener(() =>
+        {
+            GameManager.instance.BlockState();
+        });
+        onShown.AddListener(() =>
+        {
+            GameManager.instance.ReleaseState();
+        });
+        onHide.AddListener(() =>
+        {
+            GameManager.instance.BlockState();
+        });
+
+        onHidden.AddListener(() =>
+        {
+            GameManager.instance.ReleaseState();
+        });
     }
 
     private void Start()

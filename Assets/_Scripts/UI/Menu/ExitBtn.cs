@@ -11,12 +11,9 @@ public class ExitBtn : MonoBehaviour
     void Start()
     {
         btn = GetComponent<Button>();
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        btn.onClick.AddListener(() =>
+        {
+            GameManager.instance.ExitGame();
+        });
     }
 }

@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     }
 
     public GameState currentState { get; private set; }
+    private bool stateBlocked = false;
     private Player player;
     private PlayerInputAdapter playerInput;
     private UIInputAdapter uiInput;
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour
 
     public void SetState(GameState newState)
     {
+        if (stateBlocked) return;
         bool reset = currentState == GameState.Pause && newState != GameState.Game;
         bool resume = currentState == GameState.Pause && newState == GameState.Game;
         if (newState == currentState) return;
@@ -67,6 +69,16 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.Log($"new state: {newState}");
+    }
+
+    public void BlockState()
+    {
+        stateBlocked = true;
+    }
+
+    public void ReleaseState()
+    {
+        stateBlocked = false;
     }
 
     public bool IsMusicOn()

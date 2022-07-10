@@ -23,12 +23,15 @@ public class Player : MonoBehaviour
     private Vector3 originalPos;
     private Quaternion originalRot;
 
+    private int score = 0;
+
     public Transform GetShipTransform() => ship.transform;
 
     public void ResetPlayer()
     {
         ship.ResetAndBlock();
         ship.SetInput(nullInput);
+        score = 0;
     }
 
     public void SetStats(ShipStats newStats)
