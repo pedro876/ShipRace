@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     private ShipController ship;
     private RailProjection shipRailPoint;
     private RigidbodyFollow tunnelCollider;
+    ShipDestroy shipDestroy;
 
     private IShipInput nullInput;
     private IShipInput playerInput;
@@ -23,14 +24,19 @@ public class Player : MonoBehaviour
     private Vector3 originalPos;
     private Quaternion originalRot;
 
-    private int score = 0;
+    private float score = 0;
 
     public Transform GetShipTransform() => ship.transform;
 
     public void ResetPlayer()
     {
+        //ship.gameObject.SetActive(true);
+        
+        //shipDestroy.gameObject.SetActive(false);
         ship.ResetAndBlock();
         ship.SetInput(nullInput);
+        shipDestroy.Place(ship.transform.position, ship.transform.rotation);
+        shipDestroy.Reconstruct();
         score = 0;
     }
 
@@ -70,12 +76,18 @@ public class Player : MonoBehaviour
         motionBlocked = false;
     }
 
+    public int GetScore()
+    {
+        return Mathf.FloorToInt(score * 0.01f)*10;
+    }
+
     private void Awake()
     {
         cam = GetComponentInChildren<CameraController>();
         ship = GetComponentInChildren<ShipController>();
         shipRailPoint = GetComponentInChildren<RailProjection>();
         tunnelCollider = GetComponentInChildren<RigidbodyFollow>();
+        shipDestroy = GetComponentInChildren<ShipDestroy>();
 
         shipRailPoint.SetTraversor(ship);
         cam.SetTarget(ship.transform, shipRailPoint.transform);
@@ -85,6 +97,33 @@ public class Player : MonoBehaviour
         ship.SetInput(nullInput);
         ship.SetConfig(shipConfig);
         ship.SetStats(shipStats);
+        ship.onDead += () =>
+        {
+            Debug.Log("Player died");
+            BlockInput();
+            BlockMotion();
+            shipDestroy.Place(ship.transform.position, ship.transform.rotation);
+            shipDestroy.ExplodeParts(ship.transform.forward);
+            ship.HideModel();
+            //ship.gameObject.SetActive(false);
+            GameManager.instance.SetState(GameManager.GameState.GameOver);
+        };
+
+        shipDestroy.gameObject.SetActive(false);
+        shipDestroy.onFinishedReconstruction += () =>
+        {
+            //ship.gameObject.SetActive(true);
+            ship.ShowModel();
+            shipDestroy.gameObject.SetActive(false);
+        };
+
+        /*GameManager.instance.onStateChanged += state =>
+        {
+            if (state != GameManager.GameState.GameOver)
+            {
+                shipDestroy.Reconstruct();
+            }
+        };*/
 
         tunnelCollider.SetTarget(shipRailPoint.transform);
     }
@@ -106,5 +145,23 @@ public class Player : MonoBehaviour
         };
     }
 
-    
+    private void FixedUpdate()
+    {
+        CheckScore();
+    }
+
+    private void CheckScore()
+    {
+        
+        if (ship.IsAlive())
+        {
+            float distance = shipRailPoint.distanceTraversed;
+            if (!playerInput.IsSlowingDown())
+            {
+                if (playerInput.IsSpeedingUp())
+                    distance *= 2f;
+                score += distance;
+            }
+        }
+    }
 }

@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
-//using System;
+using System;
 
 public class ShipController : MonoBehaviour, IRailTraversor
 {
+    [SerializeField] LayerMask deathMask;
     [SerializeField] TrailRenderer leftTrail;
     [SerializeField] TrailRenderer rightTrail;
     [SerializeField] TrailRenderer propulsorTrail;
@@ -13,6 +14,7 @@ public class ShipController : MonoBehaviour, IRailTraversor
     private ShipStats stats;
     private ShipConfig config;
     private Rigidbody rb;
+    private MeshRenderer renderer;
     private LevelManager level;
     private Vector3 railPosition;
     private Quaternion railRotation;
@@ -25,9 +27,11 @@ public class ShipController : MonoBehaviour, IRailTraversor
     private bool blocked = true;
     private Vector3 originalPos;
     private Quaternion originalRot;
+    private bool alive = true;
 
     public Vector3 GetRailPosition() => railPosition;
     public Quaternion GetRailRotation() => railRotation;
+    public event Action onDead;
 
     public void ResetAndBlock()
     {
@@ -36,8 +40,9 @@ public class ShipController : MonoBehaviour, IRailTraversor
         dashingRight = false;
         dashingLeft = false;
         Block();
-        rb.position = originalPos;
-        rb.rotation = originalRot;
+        transform.position = originalPos;
+        transform.rotation = originalRot;
+        alive = true;
         CalculateProjection();
     }
 
@@ -79,10 +84,26 @@ public class ShipController : MonoBehaviour, IRailTraversor
         rb.isKinematic = false;
     }
 
+    public bool IsAlive()
+    {
+        return !blocked && alive;
+    }
+
+    public void ShowModel()
+    {
+        renderer.enabled = true;
+    }
+
+    public void HideModel()
+    {
+        renderer.enabled = false;
+    }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         level = FindObjectOfType<LevelManager>();
+        renderer = GetComponent<MeshRenderer>();
         originalPos = transform.position;
         originalRot = transform.rotation;
     }
@@ -220,5 +241,14 @@ public class ShipController : MonoBehaviour, IRailTraversor
         float angle = stats.tiltAngle * -input.GetTilt();
         tiltAngle = Mathf.Lerp(tiltAngle, angle, config.tiltAngleLerp * Time.fixedDeltaTime);
         return targetRot * Quaternion.Euler(0f, 0f, tiltAngle);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!IsAlive()) return;
+        if(deathMask == (deathMask | 1 << other.gameObject.layer)){
+            alive = false;
+            onDead?.Invoke();
+        }
     }
 }

@@ -15,6 +15,7 @@ public class InitPlatform : MonoBehaviour
         originalPos = transform.localPosition;
         targetPos = originalPos + Vector3.up * downDisplacement;
         GameManager.instance.onStateChanged += OnStateChanged;
+        OnStateChanged(GameManager.instance.currentState);
     }
 
     private void OnDestroy()

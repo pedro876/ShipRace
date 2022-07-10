@@ -23,6 +23,12 @@ public class GyroSystem : MonoBehaviour, IGyroSystem
         TryEnableGyroscope();
         correctionQuaternion = Quaternion.Euler(90f, 0f, 0f);
         gyroRef = Quaternion.identity;
+
+        GameManager.instance.onStateChanged += state =>
+        {
+            if (state == GameManager.GameState.CountDown)
+                Recalibrate();
+        };
     }
 
     private void Update()

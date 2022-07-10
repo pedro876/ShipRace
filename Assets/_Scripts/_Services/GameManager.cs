@@ -30,7 +30,8 @@ public class GameManager : MonoBehaviour
         Game,
         Exit,
         Settings,
-        Pause
+        Pause,
+        GameOver
     }
 
     public GameState currentState { get; private set; }
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour
     {
         if (stateBlocked) return;
         bool reset = currentState == GameState.Pause && newState != GameState.Game;
+        reset = reset || (currentState == GameState.GameOver && newState != GameState.Game);
         bool resume = currentState == GameState.Pause && newState == GameState.Game;
         if (newState == currentState) return;
         currentState = newState;
@@ -89,6 +91,11 @@ public class GameManager : MonoBehaviour
     public bool IsSfxOn()
     {
         return sfxOn;
+    }
+
+    public int GetCurrentScore()
+    {
+        return player.GetScore();
     }
 
     public void SetMusic(bool musicOn)

@@ -7,6 +7,7 @@ using UnityEngine.InputSystem.EnhancedTouch;
 
 public class PlayerInputAdapter : MonoBehaviour, IShipInput
 {
+    [SerializeField] private float xTouchSeparationPoint = 0.4f;
     [SerializeField] private float gyroExponent = 0.75f;
     [SerializeField] private float maxVerticalGyroAngle = 15f;
     [SerializeField] private float maxHorizontalGyroAngle = 15f;
@@ -69,21 +70,40 @@ public class PlayerInputAdapter : MonoBehaviour, IShipInput
         var activeTouches = UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches;
         //UnityEngine.InputSystem.EnhancedTouch.TouchHistory
 
-        if (activeTouches.Count == 0)
-        {
-            tilt = 0f;
-            return;
-        }
+        int numTouchesTilt = 0;
+        int numTouchesUpRight = 0;
+        int numTouchesDownRight = 0;
 
         lastTouchPos = 0f;
-
         for (int i = 0; i < activeTouches.Count; i++)
         {
-            lastTouchPos += activeTouches[i].screenPosition.x;
+            float posX = activeTouches[i].screenPosition.x / Screen.width;
+            float posY = activeTouches[i].screenPosition.y / Screen.height;
+            if(posX <= xTouchSeparationPoint)
+            {
+                lastTouchPos += posX / xTouchSeparationPoint;
+                numTouchesTilt++;
+            }
+            else
+            {
+                if (posY > 0.5f)
+                    numTouchesUpRight++;
+                else
+                    numTouchesDownRight++;
+            }
         }
-        lastTouchPos /= activeTouches.Count;
-        tilt = (lastTouchPos / Screen.width) * 2f - 1f;
-        tilt = Mathf.Pow(Mathf.Abs(tilt), 0.5f) * Mathf.Sign(tilt);
+
+        if (numTouchesTilt > 0)
+        {
+            lastTouchPos /= numTouchesTilt;
+            tilt = lastTouchPos * 2f - 1f;
+            tilt = Mathf.Pow(Mathf.Abs(tilt), 0.5f) * Mathf.Sign(tilt);
+        }
+        else
+            tilt = 0f;
+
+        slowingDown = numTouchesDownRight > 0 && numTouchesDownRight >= numTouchesUpRight;
+        speedingUp = numTouchesUpRight > 0 && !slowingDown;
     }
 
     private void ProcessGyro()

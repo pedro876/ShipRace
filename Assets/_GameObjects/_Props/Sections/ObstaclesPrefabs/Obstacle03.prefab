@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3469287836592053637}
   - component: {fileID: -2565232273734416430}
   - component: {fileID: -4358240923144565019}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Obstacle03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,6 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliderScale: 3
   physicMat: {fileID: 13400000, guid: 71d6c7d77fbd9a540b00e48c175e3c35, type: 2}
+  idx: 0
 --- !u!64 &-4358240923144565019
 MeshCollider:
   m_ObjectHideFlags: 0

@@ -23,6 +23,7 @@ public class LevelManager : MonoBehaviour
     Tunnel lastSection;
     int sectionIndex = 0;
     int sectionType = 0;
+    bool checkRemove = false;
 
     //List<ObjectPool<Obstacle>> obstaclePools;
     ComponentPool<Obstacle> obstaclePool;
@@ -66,6 +67,11 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void CheckRemove()
+    {
+        checkRemove = true;
+    }
+
     public void Pause()
     {
         foreach(var section in sections)
@@ -96,6 +102,11 @@ public class LevelManager : MonoBehaviour
             rectTunnelPrefabs[i].sectionIndex = i;
             tunnelPools.Add(new ComponentPool<Tunnel>(rectTunnelPrefabs[i].name + "_pool", numOfSections, rectTunnelPrefabs[i]));
         }
+
+        GameManager.instance.onStateChanged += state =>
+        {
+            checkRemove = state == GameManager.GameState.Game;
+        };
     }
     void Start()
     {
@@ -147,6 +158,7 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
         if (player == null) return;
+        if (!checkRemove) return;
         //Debug.Log(currentSection.gameObject.name);
         if(currentSection.tunnelEnd.InverseTransformPoint(player.position).z > 0f)
         {
