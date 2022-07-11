@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
         GameOver
     }
 
+    [SerializeField] Texture2D cursorTex;
+
     public GameState currentState { get; private set; }
     private bool stateBlocked = false;
     private Player player;
@@ -42,8 +44,8 @@ public class GameManager : MonoBehaviour
     private LevelManager level;
     private bool musicOn = true;
     private bool sfxOn = true;
-    public bool IsUsingGamepad = false;
 
+    [HideInInspector] public bool IsUsingGamepad = false;
     public event Action<GameState> onStateChanged;
 
     public void SetState(GameState newState)
@@ -70,6 +72,15 @@ public class GameManager : MonoBehaviour
         {
             ResumeGame();
         }
+
+
+
+#if !UNITY_ANDROID || UNITY_EDITOR
+        if (newState == GameState.Game)
+            Cursor.visible = false;
+        else
+            Cursor.visible = true;
+#endif
 
         Debug.Log($"new state: {newState}");
     }
@@ -135,6 +146,7 @@ public class GameManager : MonoBehaviour
         player.SetInput(playerInput);
         level = FindObjectOfType<LevelManager>();
         instance = this;
+        Cursor.SetCursor(cursorTex, Vector2.zero, CursorMode.Auto);
         InitPlayerPrefs();
         SetState(GameState.Init);
     }

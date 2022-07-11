@@ -18,9 +18,12 @@ public class UpDownBtn : MonoBehaviour
         canvasGroup.LeanAlpha(1f, animTime).setEaseInOutCubic();
     }
 
-    public void HideAnimation()
+    public void HideAnimation(bool immediately = false)
     {
-        canvasGroup.LeanAlpha(0f, animTime).setEaseInOutCubic();
+        if (immediately)
+            canvasGroup.alpha = 0f;
+        else
+            canvasGroup.LeanAlpha(0f, animTime).setEaseInOutCubic();
     }
 
     private void Awake()

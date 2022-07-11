@@ -52,6 +52,11 @@ public class MenuPanel : MonoBehaviour
 
         up.onClick.AddListener(()=>moveUpOrders++);
         down.onClick.AddListener(() => moveDownOrders++);
+
+        if (buttonIdx == 0)
+            upAnim.HideAnimation(true);
+        if (buttonIdx >= buttons.Count - 1)
+            downAnim.HideAnimation(true);
     }
 
     private void OnEnable()
