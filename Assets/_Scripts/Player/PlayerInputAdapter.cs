@@ -8,6 +8,7 @@ using UnityEngine.InputSystem.EnhancedTouch;
 public class PlayerInputAdapter : MonoBehaviour, IShipInput
 {
     [SerializeField] private float xTouchSeparationPoint = 0.4f;
+    [SerializeField] private float yDeadZone = 0.25f;
     [SerializeField] private float gyroExponent = 0.75f;
     [SerializeField] private float maxVerticalGyroAngle = 15f;
     [SerializeField] private float maxHorizontalGyroAngle = 15f;
@@ -45,12 +46,18 @@ public class PlayerInputAdapter : MonoBehaviour, IShipInput
         dashTouch.performed += OnDashTouch;
         #if (UNITY_ANDROID || UNITY_EDITOR)
             EnhancedTouchSupport.Enable();
-        #endif
+#endif
+        input.onControlsChanged += (ctx) =>
+        {
+            GameManager.instance.IsUsingGamepad = input.currentControlScheme == "Gamepad";
+            Debug.Log($"Current control scheme: {input.currentControlScheme}");
+        };
     }
 
     private void Update()
     {
         sideMotion = Vector2.Lerp(sideMotion, rawSideMotion, sideMotionLerpFactor * Time.deltaTime);
+        if (GameManager.instance.IsUsingGamepad) return;
         ProcessTouches();
         ProcessGyro();
     }
@@ -65,6 +72,7 @@ public class PlayerInputAdapter : MonoBehaviour, IShipInput
 #if UNITY_EDITOR
         if (input.currentControlScheme != "Mobile") return;
 #endif
+
         //Debug.Log(Input.touchSupported);
         //if (!Input.touchSupported) return;
         var activeTouches = UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches;
@@ -75,32 +83,37 @@ public class PlayerInputAdapter : MonoBehaviour, IShipInput
         int numTouchesDownRight = 0;
 
         lastTouchPos = 0f;
+        float lastTiltPos = 0f;
         for (int i = 0; i < activeTouches.Count; i++)
         {
             float posX = activeTouches[i].screenPosition.x / Screen.width;
             float posY = activeTouches[i].screenPosition.y / Screen.height;
+            lastTouchPos += posX;
             if(posX <= xTouchSeparationPoint)
             {
-                lastTouchPos += posX / xTouchSeparationPoint;
+                lastTiltPos += posX / xTouchSeparationPoint;
                 numTouchesTilt++;
             }
             else
             {
-                if (posY > 0.5f)
+                if (posY > 0.5f + yDeadZone *0.5f)
                     numTouchesUpRight++;
-                else
+                else if(posY < 0.5f-yDeadZone *0.5f)
                     numTouchesDownRight++;
             }
         }
 
         if (numTouchesTilt > 0)
         {
-            lastTouchPos /= numTouchesTilt;
-            tilt = lastTouchPos * 2f - 1f;
+            lastTiltPos /= numTouchesTilt;
+            tilt = lastTiltPos * 2f - 1f;
             tilt = Mathf.Pow(Mathf.Abs(tilt), 0.5f) * Mathf.Sign(tilt);
         }
         else
             tilt = 0f;
+
+        if (activeTouches.Count > 0)
+            lastTouchPos /= activeTouches.Count;
 
         slowingDown = numTouchesDownRight > 0 && numTouchesDownRight >= numTouchesUpRight;
         speedingUp = numTouchesUpRight > 0 && !slowingDown;
@@ -108,6 +121,7 @@ public class PlayerInputAdapter : MonoBehaviour, IShipInput
 
     private void ProcessGyro()
     {
+
         IGyroSystem gyro = GameManager.serviceLocator.GetService<IGyroSystem>();
         if (!gyro.IsWorking()) return;
         #if !(UNITY_ANDROID || UNITY_EDITOR)
@@ -143,7 +157,7 @@ public class PlayerInputAdapter : MonoBehaviour, IShipInput
 
     private void OnDashTouch(InputAction.CallbackContext ctx)
     {
-        if (lastTouchPos > Screen.width / 2)
+        if (lastTouchPos > 0.5f)
         {
             OnDashRight(ctx);
         }

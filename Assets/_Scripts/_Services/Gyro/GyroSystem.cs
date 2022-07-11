@@ -27,19 +27,27 @@ public class GyroSystem : MonoBehaviour, IGyroSystem
         GameManager.instance.onStateChanged += state =>
         {
             if (state == GameManager.GameState.CountDown)
+            {
                 Recalibrate();
+            }
         };
     }
 
     private void Update()
     {
         TryEnableGyroscope();
-        if (working)
+        if (working && !GameManager.instance.IsUsingGamepad)
         {
             rawAttitude = GyroToUnity();
             attitude = gyroRef * rawAttitude;
-            transform.rotation = attitude;
+            
         }
+        else
+        {
+            rawAttitude = Quaternion.identity;
+            attitude = rawAttitude;
+        }
+        transform.rotation = attitude;
     }
 
     private void TryEnableGyroscope()

@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     private LevelManager level;
     private bool musicOn = true;
     private bool sfxOn = true;
+    public bool IsUsingGamepad = false;
 
     public event Action<GameState> onStateChanged;
 
@@ -73,47 +74,41 @@ public class GameManager : MonoBehaviour
         Debug.Log($"new state: {newState}");
     }
 
-    public void BlockState()
-    {
-        stateBlocked = true;
-    }
+    public void BlockState() => stateBlocked = true;
 
-    public void ReleaseState()
-    {
-        stateBlocked = false;
-    }
+    public void ReleaseState() => stateBlocked = false;
 
-    public bool IsMusicOn()
-    {
-        return musicOn;
-    }
+    public bool IsMusicOn() => musicOn;
+    public bool IsSfxOn() => sfxOn;
 
-    public bool IsSfxOn()
-    {
-        return sfxOn;
-    }
-
-    public int GetCurrentScore()
-    {
-        return player.GetScore();
-    }
+    public int GetCurrentScore() => player.GetScore();
 
     public void SetMusic(bool musicOn)
     {
         Debug.Log("Music turned: " + musicOn);
         this.musicOn = musicOn;
+        PlayerPrefs.SetInt("musicOn", musicOn ? 1 : 0);
     }
 
     public void SetSFX(bool sfxOn)
     {
         Debug.Log("Sfx turned: " + sfxOn);
         this.sfxOn = sfxOn;
+        PlayerPrefs.SetInt("sfxOn", sfxOn ? 1 : 0);
     }
 
-    public void ExitGame()
+    public void UpdateHighScore()
     {
-        Application.Quit();
+        int highscore = GetHighScore();
+        if(player.GetScore() > highscore)
+        {
+            PlayerPrefs.SetInt("highscore", player.GetScore());
+        }
     }
+
+    public int GetHighScore() => PlayerPrefs.GetInt("highscore");
+
+    public void ExitGame() => Application.Quit();
 
     private void PauseGame()
     {
@@ -140,6 +135,7 @@ public class GameManager : MonoBehaviour
         player.SetInput(playerInput);
         level = FindObjectOfType<LevelManager>();
         instance = this;
+        InitPlayerPrefs();
         SetState(GameState.Init);
     }
 
@@ -148,5 +144,15 @@ public class GameManager : MonoBehaviour
         level.SetPlayer(player.GetShipTransform());
     }
 
-    
+    private void InitPlayerPrefs()
+    {
+        if (!PlayerPrefs.HasKey("musicOn"))
+            SetMusic(true);
+        if (!PlayerPrefs.HasKey("sfxOn"))
+            SetSFX(true);
+        if (!PlayerPrefs.HasKey("highscore"))
+            PlayerPrefs.SetInt("highscore", 0);
+        musicOn = PlayerPrefs.GetInt("musicOn") == 1;
+        sfxOn = PlayerPrefs.GetInt("sfxOn") == 1;
+    }
 }
