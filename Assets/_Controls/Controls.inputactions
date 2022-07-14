@@ -200,7 +200,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "Mouse Axis",
+                    "name": "Arrow Axis",
                     "id": "9c0b46c4-e3c7-4ea2-bb15-a593f28f4ba1",
                     "path": "1DAxis",
                     "interactions": "",
@@ -213,7 +213,7 @@
                 {
                     "name": "negative",
                     "id": "49574340-5ced-46fb-b74d-68490bb8f5c1",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -224,7 +224,7 @@
                 {
                     "name": "positive",
                     "id": "87750dae-41c1-4f7e-adbd-ab46b762f15f",
-                    "path": "<Mouse>/rightButton",
+                    "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -300,6 +300,17 @@
                 },
                 {
                     "name": "",
+                    "id": "7ffe7c6e-f28b-4c1c-b119-62cb70f30932",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "SlowDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "2cbf3bcc-7eb6-4a59-95f5-cb2b63da9098",
                     "path": "<Keyboard>/leftShift",
                     "interactions": "",
@@ -327,6 +338,17 @@
                     "interactions": "Hold",
                     "processors": "",
                     "groups": "Gamepad",
+                    "action": "SpeedUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ae16cbfa-1a77-409e-ac53-d6e76da15601",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
                     "action": "SpeedUp",
                     "isComposite": false,
                     "isPartOfComposite": false

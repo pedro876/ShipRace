@@ -52,6 +52,7 @@ public class GyroSystem : MonoBehaviour, IGyroSystem
 
     private void TryEnableGyroscope()
     {
+#if !UNITY_WEBGL
         if (UnityEngine.InputSystem.Gyroscope.current != null && AttitudeSensor.current != null)
         {
             InputSystem.EnableDevice(UnityEngine.InputSystem.Gyroscope.current);
@@ -64,6 +65,7 @@ public class GyroSystem : MonoBehaviour, IGyroSystem
                 Debug.Log("Gyro is enabled and working");
             }
         }
+#endif
     }
 
     private Quaternion GyroToUnity()

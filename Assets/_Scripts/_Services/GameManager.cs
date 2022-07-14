@@ -32,7 +32,8 @@ public class GameManager : MonoBehaviour
         Settings,
         Pause,
         GameOver,
-        Credits
+        Credits,
+        Controls
     }
 
     [SerializeField] Texture2D cursorTex;
@@ -49,8 +50,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]private float maxDifficulty = 5f;
     private bool mustIncreaseDifficulty = false;
     [SerializeField] float difficultyGainPerSecond = 0.01f;
-    public float musicVolume => musicOn ? 1 : 0;
-    public float effectsVolume => sfxOn ? 1 : 0;
+    public float musicVolume => musicOn ? 0.5f : 0;
+    public float effectsVolume => sfxOn ? 0.5f : 0;
 
     [HideInInspector] public bool IsUsingGamepad = false;
     public event Action<GameState> onStateChanged;

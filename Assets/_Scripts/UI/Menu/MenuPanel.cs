@@ -13,6 +13,7 @@ public class MenuPanel : MonoBehaviour
     [SerializeField] float buttonSeparation = 10f;
     [SerializeField] float halfVisibleButtonScale = 0.5f;
     [SerializeField] MenuButton defaultButton;
+    [SerializeField] MenuButton quitButton;
     [SerializeField] List<MenuButton> buttons;
 
     int buttonIdx;
@@ -22,6 +23,11 @@ public class MenuPanel : MonoBehaviour
 
     private void Start()
     {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        buttons.Remove(quitButton);
+        Destroy(quitButton.gameObject);
+#endif
+
         upAnim = up.GetComponent<UpDownBtn>();
         downAnim = down.GetComponent<UpDownBtn>();
         buttonIdx = buttons.IndexOf(defaultButton);

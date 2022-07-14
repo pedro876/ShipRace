@@ -7,42 +7,96 @@ public class OptionsList : MonoBehaviour
 {
     [SerializeField] RectTransform selectImg;
     [SerializeField] RectTransform[] options;
+    private List<RectTransform> clearedOptions;
     Button[] buttons;
     int currentSetting = 0;
     Vector2 localAnchoredPosition;
+    [SerializeField] bool horizontal = false;
+    private bool initialized = false;
 
-    private void Awake()
+    private void Init()
     {
-        localAnchoredPosition = selectImg.anchoredPosition;
-        buttons = new Button[options.Length];
+        clearedOptions = new List<RectTransform>();
         for (int i = 0; i < options.Length; i++)
         {
+            if (options[i] != null)
+                clearedOptions.Add(options[i]);
+        }
+
+        localAnchoredPosition = selectImg.anchoredPosition;
+        buttons = new Button[clearedOptions.Count];
+        for (int i = 0; i < clearedOptions.Count; i++)
+        {
             int j = i;
-            buttons[i] = options[i].GetComponentInChildren<Button>();
+            buttons[i] = clearedOptions[i].GetComponentInChildren<Button>();
             buttons[i].onClick.AddListener(() =>
             {
                 currentSetting = j;
                 UpdateSelectImgPos();
             });
         }
-            
+        initialized = true;
     }
 
     private void OnEnable()
     {
+        if (initialized)
+            Prepare();
+    }
+
+    private void Start()
+    {
+        if (!initialized)
+        {
+            Init();
+            Prepare();
+        }
+    }
+
+    void Prepare()
+    {
         currentSetting = 0;
         UpdateSelectImgPos();
         var input = GameManager.serviceLocator.GetService<UIInputAdapter>();
-        input.onDown += MoveDown;
-        input.onUp += MoveUp;
+        if (!horizontal)
+        {
+            input.onDown += MoveDown;
+            input.onUp += MoveUp;
+        }
+        else
+        {
+            input.onRight += MoveDown;
+            input.onLeft += MoveUp;
+        }
+
         input.onSelect += Press;
     }
+
+    /*private int CheckNonDestroyedOptions()
+    {
+        int count = 0;
+        for(int i = 0; i < options.Length; i++)
+        {
+            if (options[i] != null)
+                count++;
+        }
+        return count;
+    }*/
 
     private void OnDisable()
     {
         var input = GameManager.serviceLocator.GetService<UIInputAdapter>();
-        input.onDown -= MoveDown;
-        input.onUp -= MoveUp;
+        if (!horizontal)
+        {
+            input.onDown -= MoveDown;
+            input.onUp -= MoveUp;
+        }
+        else
+        {
+            input.onRight -= MoveDown;
+            input.onLeft -= MoveUp;
+        }
+        
         input.onSelect -= Press;
     }
 
@@ -57,7 +111,7 @@ public class OptionsList : MonoBehaviour
 
     private void MoveDown()
     {
-        if (currentSetting < options.Length-1)
+        if (currentSetting < clearedOptions.Count-1)
         {
             currentSetting++;
             UpdateSelectImgPos();
@@ -66,7 +120,7 @@ public class OptionsList : MonoBehaviour
 
     private void UpdateSelectImgPos()
     {
-        selectImg.SetParent(options[currentSetting]);
+        selectImg.SetParent(clearedOptions[currentSetting]);
         selectImg.anchoredPosition = localAnchoredPosition;
     }
 
