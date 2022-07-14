@@ -47,4 +47,7 @@ public class ButtonStylePreset : ScriptableObject
 
     [Header("Animation Transition")]
     public AnimationTriggers animationTriggers;
+
+    [Header("Audio")]
+    public AudioClip pressClip;
 }

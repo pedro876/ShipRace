@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 using System;
+using UnityEngine.Events;
 
 public class ShipController : MonoBehaviour, IRailTraversor
 {
+    [SerializeField] UnityEvent onSpeedUp;
     [SerializeField] LayerMask deathMask;
     [SerializeField] TrailRenderer leftTrail;
     [SerializeField] TrailRenderer rightTrail;
@@ -130,7 +132,12 @@ public class ShipController : MonoBehaviour, IRailTraversor
     {
         leftTrail.emitting = !blocked && !input.IsSlowingDown();
         rightTrail.emitting = !blocked && !input.IsSlowingDown();
+        bool wasEmitting = propulsorTrail.emitting;
         propulsorTrail.emitting = !blocked && input.IsSpeedingUp() && !input.IsSlowingDown();
+        if(propulsorTrail.emitting && !wasEmitting)
+        {
+            onSpeedUp?.Invoke();
+        }
     }
 
     private void FixedUpdate()

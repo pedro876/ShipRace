@@ -11,6 +11,15 @@ public class ButtonStyle : MonoBehaviour
     [SerializeField] ButtonStylePreset stylePreset;
     [SerializeField] bool autoUpdate = true;
 
+    private void Awake()
+    {
+        Button btn = GetComponent<Button>();
+        btn.onClick.AddListener(() =>
+        {
+            GameManager.serviceLocator.GetService<PersistentAudioSource>().PlayEffect(stylePreset.pressClip);
+        });
+    }
+
 #if UNITY_EDITOR
     void Start()
     {

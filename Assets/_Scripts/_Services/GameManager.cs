@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
     private LevelManager level;
     private bool musicOn = true;
     private bool sfxOn = true;
+    public float musicVolume => musicOn ? 1 : 0;
+    public float effectsVolume => sfxOn ? 1 : 0;
 
     [HideInInspector] public bool IsUsingGamepad = false;
     public event Action<GameState> onStateChanged;
@@ -142,6 +144,7 @@ public class GameManager : MonoBehaviour
         playerInput = FindObjectOfType<PlayerInputAdapter>();
         uiInput = FindObjectOfType<UIInputAdapter>();
         serviceLocator.RegisterService<UIInputAdapter>(uiInput);
+        serviceLocator.RegisterService<PersistentAudioSource>(FindObjectOfType<PersistentAudioSource>());
         player = FindObjectOfType<Player>();
         player.SetInput(playerInput);
         level = FindObjectOfType<LevelManager>();

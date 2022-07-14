@@ -44,3 +44,4 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
+  pressClip: {fileID: 8300000, guid: 2be92d97734a02f4e85ea89656da386a, type: 3}
