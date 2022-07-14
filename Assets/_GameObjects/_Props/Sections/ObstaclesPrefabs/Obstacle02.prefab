@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5897799713628323503}
   - component: {fileID: 7383345934257123594}
   - component: {fileID: 4724871170701690304}
-  - component: {fileID: 3469287836822613378}
   - component: {fileID: 3469287836822613379}
   - component: {fileID: -8344838628708528416}
   - component: {fileID: -2570308304425162233}
@@ -87,21 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3469287836822613378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6526526457517646869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d0c52af9a2ac340b41f4fe820d38ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minAngularSpeed: 30
-  maxAngularSpeed: 30
-  axis: {x: 0, y: 0, z: 1}
 --- !u!54 &3469287836822613379
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -117,7 +101,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &-8344838628708528416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,9 +114,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5f8726bbf2c2d74a84c1639c9071dfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idx: 0
   colliderScale: 3
   physicMat: {fileID: 13400000, guid: 71d6c7d77fbd9a540b00e48c175e3c35, type: 2}
-  idx: 0
 --- !u!64 &-2570308304425162233
 MeshCollider:
   m_ObjectHideFlags: 0

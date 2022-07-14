@@ -31,7 +31,8 @@ public class GameManager : MonoBehaviour
         Exit,
         Settings,
         Pause,
-        GameOver
+        GameOver,
+        Credits
     }
 
     [SerializeField] Texture2D cursorTex;
@@ -44,6 +45,10 @@ public class GameManager : MonoBehaviour
     private LevelManager level;
     private bool musicOn = true;
     private bool sfxOn = true;
+    [SerializeField]private float difficulty = 1f;
+    [SerializeField]private float maxDifficulty = 5f;
+    private bool mustIncreaseDifficulty = false;
+    [SerializeField] float difficultyGainPerSecond = 0.01f;
     public float musicVolume => musicOn ? 1 : 0;
     public float effectsVolume => sfxOn ? 1 : 0;
 
@@ -61,9 +66,7 @@ public class GameManager : MonoBehaviour
         onStateChanged?.Invoke(newState);
         if(reset)
         {
-            Debug.Log("Reseting game");
-            level.ResetLevel();
-            player.ResetPlayer();
+            ResetGame();
         }
 
         if (newState == GameState.Pause)
@@ -74,6 +77,8 @@ public class GameManager : MonoBehaviour
         {
             ResumeGame();
         }
+
+        mustIncreaseDifficulty = newState == GameState.Game;
 
 
 
@@ -87,6 +92,8 @@ public class GameManager : MonoBehaviour
         Debug.Log($"new state: {newState}");
     }
 
+    
+
     public void BlockState() => stateBlocked = true;
 
     public void ReleaseState() => stateBlocked = false;
@@ -95,6 +102,7 @@ public class GameManager : MonoBehaviour
     public bool IsSfxOn() => sfxOn;
 
     public int GetCurrentScore() => player.GetScore();
+    public float GetDifficulty() => difficulty;
 
     public void SetMusic(bool musicOn)
     {
@@ -137,6 +145,14 @@ public class GameManager : MonoBehaviour
         level.Resume();
     }
 
+    private void ResetGame()
+    {
+        Debug.Log("Reseting game");
+        difficulty = 1f;
+        level.ResetLevel();
+        player.ResetPlayer();
+    }
+
     private void Awake()
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
@@ -157,6 +173,17 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         level.SetPlayer(player.GetShipTransform());
+    }
+
+    private void Update()
+    {
+        if (mustIncreaseDifficulty)
+        {
+            difficulty += difficultyGainPerSecond * Time.deltaTime;
+            if (difficulty > maxDifficulty)
+                difficulty = maxDifficulty;
+        }
+            
     }
 
     private void InitPlayerPrefs()

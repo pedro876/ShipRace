@@ -35,6 +35,11 @@ public class MenuButton : MonoBehaviour
         transitionVal = new SmoothFloat(1f);
     }
 
+    private void OnEnable()
+    {
+        UpdateVisibility();
+    }
+
     public float GetAnchoredPosY() => rectTransform.anchoredPosition.y;
 
     public void SetAnchoredPosY(float y) => rectTransform.anchoredPosition = new Vector2(rectTransform.anchoredPosition.x, y);
@@ -73,13 +78,20 @@ public class MenuButton : MonoBehaviour
 
     private void Update()
     {
-        if (transitionVal.Update(Time.deltaTime))
-        {
-            float val = transitionVal.Value;
-            rectTransform.sizeDelta = new Vector2(val, val) * showScale;
-            text.fontSize = val * originalFontSize;
-            originalFontColor.a = val;
-            text.color = originalFontColor;
-        }
+        /*if (transitionVal.Update(Time.deltaTime))
+        {*/
+        if(transitionVal.changing)
+            transitionVal.Update(Time.deltaTime);
+            UpdateVisibility();
+        /*}*/
+    }
+
+    private void UpdateVisibility()
+    {
+        float val = transitionVal.Value;
+        rectTransform.sizeDelta = new Vector2(val, val) * showScale;
+        text.fontSize = val * originalFontSize;
+        originalFontColor.a = val;
+        text.color = originalFontColor;
     }
 }

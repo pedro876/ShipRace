@@ -16,7 +16,6 @@ public class RotateAround : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rotSpeed = Random.Range(minAngularSpeed, maxAngularSpeed) * Mathf.Sign(Random.Range(-1f, 1f));
-        
     }
 
 

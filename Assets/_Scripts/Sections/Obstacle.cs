@@ -4,20 +4,27 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
+    [HideInInspector] public int idx;
     [SerializeField] float colliderScale = 3f;
     [SerializeField] PhysicMaterial physicMat;
-    RotateAround rotator;
 
-    public int idx;
+
+    const float minAngularSpeed = 20f;
+    const float maxAngularSpeed = 30f;
+    private Vector3 axis = Vector3.forward;
+
+    Rigidbody rb;
+    float rotSpeed;
+    private bool paused = false;
 
     public void Pause()
     {
-        rotator.enabled = false;
+        paused = true;
     }
 
     public void Resume()
     {
-        rotator.enabled = true;
+        paused = false;
     }
 
     private void Awake()
@@ -31,6 +38,18 @@ public class Obstacle : MonoBehaviour
         obj.transform.localPosition = Vector3.zero;
         obj.transform.localRotation = Quaternion.identity;
         obj.transform.localScale = new Vector3(1f, 1f, colliderScale);
-        rotator = GetComponent<RotateAround>();
+        rb = GetComponent<Rigidbody>();
+    }
+
+    private void OnEnable()
+    {
+        rotSpeed = Random.Range(minAngularSpeed, maxAngularSpeed) * Mathf.Sign(Random.Range(-1f, 1f)) * GameManager.instance.GetDifficulty();
+    }
+
+    private void FixedUpdate()
+    {
+        if (paused) return;
+        Vector3 worldAxis = transform.TransformDirection(axis);
+        rb.MoveRotation(Quaternion.AngleAxis(rotSpeed * Time.fixedDeltaTime, worldAxis) * transform.rotation);
     }
 }
