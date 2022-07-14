@@ -35,5 +35,27 @@ public class UIInputAdapter : MonoBehaviour
         selectAction.started += ctx => onSelect?.Invoke();
         anyAction.performed += ctx => onAny?.Invoke();
         escapeAction.performed += ctx => onEscape?.Invoke();
+
+
+
+        InputAction leftStick = input.actions["LeftStick"];
+        leftStick.performed += ctx =>
+        {
+            var axis = ctx.ReadValue<Vector2>();
+            if(Mathf.Abs(axis.x) > Mathf.Abs(axis.y))
+            {
+                if (axis.x > 0f)
+                    onRight?.Invoke();
+                else
+                    onLeft?.Invoke();
+            }
+            else
+            {
+                if (axis.y > 0f)
+                    onUp?.Invoke();
+                else
+                    onDown?.Invoke();
+            }
+        };
     }
 }

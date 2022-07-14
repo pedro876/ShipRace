@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
             Cursor.visible = true;
 #endif
 
-        Debug.Log($"new state: {newState}");
+        //Debug.Log($"new state: {newState}");
     }
 
     

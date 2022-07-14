@@ -34,6 +34,7 @@ public class PlayerInputAdapter : MonoBehaviour, IShipInput
         InputAction slowDown = input.actions["SlowDown"];
         InputAction speedUp = input.actions["SpeedUp"];
         InputAction dashTouch = input.actions["DashTouch"];
+        InputAction rightStick = input.actions["RightStick"];
         sideMotion.performed += OnSideMotion;
         tilt.performed += OnTilt;
         tilt.canceled += OnTilt;
@@ -44,6 +45,7 @@ public class PlayerInputAdapter : MonoBehaviour, IShipInput
         speedUp.started += OnSpeedUp;
         speedUp.canceled += OnSpeedUp;
         dashTouch.performed += OnDashTouch;
+        rightStick.performed += OnRightStick;
         #if (UNITY_ANDROID || UNITY_EDITOR)
             EnhancedTouchSupport.Enable();
 #endif
@@ -180,6 +182,13 @@ public class PlayerInputAdapter : MonoBehaviour, IShipInput
     private void OnTilt(InputAction.CallbackContext ctx)
     {
         tilt = ctx.ReadValue<float>();
+    }
+
+    private void OnRightStick(InputAction.CallbackContext ctx)
+    {
+        var axis = ctx.ReadValue<Vector2>().y;
+        speedingUp = axis > 0.5f;
+        slowingDown = axis < -0.5f;
     }
 
     private void OnSlowDown(InputAction.CallbackContext ctx)

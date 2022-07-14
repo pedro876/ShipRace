@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UIAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 128
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 5d58061ee72bdd6498965707cecff4e2, type: 3}
+    - {fileID: 2800000, guid: e807823287a929c49b4360a688a9d308, type: 3}
+    - {fileID: 2800000, guid: 3d0fb15e907ccfc46bb6ee207b7bacc6, type: 3}
+    - {fileID: 2800000, guid: c7d0ca8e48ec799498e215c3648eceea, type: 3}
+    - {fileID: 2800000, guid: 9acf09b1e594dfd4aa2bd9cc17c91b29, type: 3}
+    - {fileID: 2800000, guid: 8f704494e3290be4b929a197fec9de04, type: 3}
+    - {fileID: 2800000, guid: be0dc0d5417a5b544a1b83915f909a93, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: e807823287a929c49b4360a688a9d308, type: 3}
+  - {fileID: 21300000, guid: 8f704494e3290be4b929a197fec9de04, type: 3}
+  - {fileID: 21300000, guid: be0dc0d5417a5b544a1b83915f909a93, type: 3}
+  - {fileID: 21300000, guid: 5d58061ee72bdd6498965707cecff4e2, type: 3}
+  - {fileID: 21300000, guid: 3d0fb15e907ccfc46bb6ee207b7bacc6, type: 3}
+  - {fileID: 21300000, guid: c7d0ca8e48ec799498e215c3648eceea, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - keyboard
+  - mobile
+  - selectArrow
+  - gamepad
+  - LowResArrow
+  - LowResBtn
+  m_RenderDataMap: {}
+  m_Tag: UIAtlas
+  m_IsVariant: 0

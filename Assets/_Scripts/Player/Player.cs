@@ -18,9 +18,6 @@ public class Player : MonoBehaviour
     private IShipInput nullInput;
     private IShipInput playerInput;
 
-    private bool inputBlocked = true;
-    private bool motionBlocked = true;
-
     private Vector3 originalPos;
     private Quaternion originalRot;
 
@@ -55,25 +52,21 @@ public class Player : MonoBehaviour
     public void BlockInput()
     {
         ship.SetInput(nullInput);
-        inputBlocked = true;
     }
 
     public void ReleaseInput()
     {
         ship.SetInput(playerInput);
-        inputBlocked = false;
     }
 
     public void BlockMotion()
     {
         ship.Block();
-        motionBlocked = true;
     }
 
     public void ReleaseMotion()
     {
         ship.Release();
-        motionBlocked = false;
     }
 
     public int GetScore()

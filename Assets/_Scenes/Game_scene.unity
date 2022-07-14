@@ -11085,6 +11085,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5702122043407427200, guid: 5b77d25fbedc6634bb90fd9189275572,
         type: 3}
+      propertyPath: poolSize
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5702122043407427200, guid: 5b77d25fbedc6634bb90fd9189275572,
+        type: 3}
       propertyPath: allClips.Array.size
       value: 5
       objectReference: {fileID: 0}

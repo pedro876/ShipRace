@@ -16,7 +16,7 @@ public class ShipController : MonoBehaviour, IRailTraversor
     private ShipStats stats;
     private ShipConfig config;
     private Rigidbody rb;
-    private MeshRenderer renderer;
+    private MeshRenderer meshRenderer;
     private LevelManager level;
     private Vector3 railPosition;
     private Quaternion railRotation;
@@ -93,19 +93,19 @@ public class ShipController : MonoBehaviour, IRailTraversor
 
     public void ShowModel()
     {
-        renderer.enabled = true;
+        meshRenderer.enabled = true;
     }
 
     public void HideModel()
     {
-        renderer.enabled = false;
+        meshRenderer.enabled = false;
     }
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         level = FindObjectOfType<LevelManager>();
-        renderer = GetComponent<MeshRenderer>();
+        meshRenderer = GetComponent<MeshRenderer>();
         originalPos = transform.position;
         originalRot = transform.rotation;
     }
